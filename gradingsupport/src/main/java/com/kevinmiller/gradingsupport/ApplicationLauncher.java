@@ -11,14 +11,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class ApplicationLauncher extends Application {
-
 	private static Scene scene;
 
 	@Override
 	public void start(Stage stage) throws IOException {
-//		scene = new Scene(loadFXML("primary"), 640, 480);
-//		stage.setScene(scene);
-//		stage.show();
 		UserScreen.init(stage);
 	}
 

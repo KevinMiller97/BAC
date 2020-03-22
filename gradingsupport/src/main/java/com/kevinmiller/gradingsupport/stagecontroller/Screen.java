@@ -34,6 +34,20 @@ public class Screen {
 		Scene scene = new Scene(root);
 //		scene.getStylesheets().add(e) TODO
 
+		stage.setX(bounds.getX());
+		stage.setY(bounds.getY());
+		stage.setWidth(bounds.getWidth());
+		stage.setHeight(bounds.getHeight());
+		stage.setScene(scene);
+		stage.setOnCloseRequest(close -> {
+			try {
+				GlobalScreen.unregisterNativeHook();
+			} catch (NativeHookException e) {
+				System.err.println(e.getMessage());
+			}
+		});
+		stage.setTitle("Grading Support System"); // TODO add proper title
+
 		try {
 			GlobalScreen.registerNativeHook();
 		} catch (NativeHookException ex) {
