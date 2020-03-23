@@ -3,6 +3,8 @@ package com.kevinmiller.gradingsupport.stagecontroller;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 
+import com.kevinmiller.gradingsupport.json.JSONReader;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -48,6 +50,7 @@ public class Screen {
 		});
 		stage.setTitle("Grading Support System"); // TODO add proper title
 
+		GlobalScreen.addNativeKeyListener(new GlobalKeyListener());
 		try {
 			GlobalScreen.registerNativeHook();
 		} catch (NativeHookException ex) {
@@ -55,8 +58,9 @@ public class Screen {
 			System.err.println("There was a problem registering the native hook, key combinations will not work");
 			System.err.println(ex.getMessage());
 		}
-		GlobalScreen.addNativeKeyListener(new GlobalKeyListener());
 
+		// TODO add proper handling
+		JSONReader.loadConfiguration();
 	}
 
 }
