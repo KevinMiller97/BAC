@@ -3,7 +3,7 @@ package com.kevinmiller.gradingsupport.stagecontroller;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 
-import com.kevinmiller.gradingsupport.json.JSONReader;
+import com.kevinmiller.gradingsupport.fxgui.FXBaseApplication;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 public class Screen {
 
-	private final StackPane bodyWrapper = new StackPane();
+	private final FXBaseApplication base = new FXBaseApplication();
 	private final StackPane footerWrapper = new StackPane();
 	private final StackPane notificationWrapper = new StackPane();
 
@@ -30,7 +30,7 @@ public class Screen {
 
 		StackPane root = new StackPane();
 		root.setPickOnBounds(false);
-		root.getChildren().add(new BorderPane(bodyWrapper, null, null, footerWrapper, null));
+		root.getChildren().add(new BorderPane(base, null, null, footerWrapper, null));
 		root.getChildren().add(notificationWrapper);
 
 		Scene scene = new Scene(root);
@@ -58,9 +58,6 @@ public class Screen {
 			System.err.println("There was a problem registering the native hook, key combinations will not work");
 			System.err.println(ex.getMessage());
 		}
-
-		// TODO add proper handling
-		JSONReader.loadConfiguration();
 	}
 
 }

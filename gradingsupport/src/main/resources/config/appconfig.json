@@ -1,10 +1,44 @@
 {
-"segments": [
+"parts" : [
 	{
-		"name": "unit testing"
-	}, 
+		"name": "Grading Part One",
+		"segments": [
+			{
+				"name": "Step one: Preparation"
+			},
+			{
+				"name": "Step two: Automatic Evaluation"
+			},
+			{
+				"name": "Step three: Implementation Progress"
+			} 
+		] 
+	},
 	{
-		"name" : "logging"
+		"name" : "Grading Part Two",
+		"segments": [
+			{
+				"name": "Logging",
+				"bulletpoints": [
+					{
+						"name": "Log Implementation"
+					},
+					{
+						"name": "Logging Quality"
+					}
+				],
+				"hint": "Useful and informative; Multiple appropriate log levels"
+			},
+			{
+				"name": "Unit Testing"
+			},
+			{
+				"name": "Error Handling"
+			} ,
+			{
+				"name": "Zeitdokumentation"
+			}
+		]
 	}
 ]
 }

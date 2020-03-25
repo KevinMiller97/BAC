@@ -18,12 +18,12 @@ import org.jnativehook.keyboard.NativeKeyListener;
  */
 public class GlobalKeyListener implements NativeKeyListener {
 
+	final Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
 	private boolean ctrl = false;
 
 	public GlobalKeyListener() {
 		// Get the logger for "org.jnativehook" and set the level to warning.
 		// Set level to warning or else it spams the console
-		Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
 		logger.setLevel(Level.WARNING);
 		logger.setUseParentHandlers(false);
 	}
