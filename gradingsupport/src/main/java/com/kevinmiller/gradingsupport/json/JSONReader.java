@@ -22,7 +22,6 @@ public class JSONReader {
 		try {
 			String configRead = IOUtils.toString(JSONReader.class.getResourceAsStream(configLocation), "UTF-8");
 			JSONObject configuration = new JSONObject(configRead);
-			logger.log(Level.INFO, "read configuration: \n " + configRead);
 			return configuration;
 		} catch (FileNotFoundException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);

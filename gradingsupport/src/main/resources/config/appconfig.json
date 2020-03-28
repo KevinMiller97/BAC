@@ -1,16 +1,73 @@
 {
-"parts" : [
+"sections" : [
 	{
 		"name": "Grading Part One",
 		"segments": [
 			{
-				"name": "Step one: Preparation"
+				"name": "Step one: Preparation",
+				"points_ranked": "false",
+				"subpoints": [
+					{
+					"title": "Not done yet",
+					"points": 0
+					},
+					{
+					"title": "Failed (No Code)",
+					"points": 0
+					},
+					{
+					"title": "Failed (Import or Jar Building)",
+					"points": 0.8
+					},
+					{
+					"title": "Succeeded (Import and Jar Building)",
+					"points": 1
+					}
+				]
 			},
 			{
-				"name": "Step two: Automatic Evaluation"
+				"name": "Step two: Automatic Evaluation",
+				"points_ranked": "false",
+				"subpoints": [
+					{
+					"title": "Not done yet",
+					"points": 0
+					},
+					{
+					"title": "Failed",
+					"points": 0
+					},
+					{
+					"title": "Succeeded",
+					"points": 1
+					}
+				]
 			},
 			{
-				"name": "Step three: Implementation Progress"
+				"name": "Step three: Implementation Progress",
+				"points_ranked": "false",
+				"subpoints": [
+					{
+					"title": "0-2 Features implemented in time",
+					"points": 0
+					},
+					{
+					"title": "3 Features implemented in time",
+					"points": 0.25
+					},
+					{
+					"title": "4 Features implemented in time",
+					"points": 0.5
+					},
+					{
+					"title": "5 Features implemented in time",
+					"points": 0.75
+					},
+					{
+					"title": "6 Features implemented in time",
+					"points": 1
+					}
+				]
 			} 
 		] 
 	},
@@ -21,22 +78,317 @@
 				"name": "Logging",
 				"bulletpoints": [
 					{
-						"name": "Log Implementation"
+						"name": "Log implementation",
+						"points_ranked": "true",
+						"max_points": 1,
+						"max_rank": 6,
+						"subpoints": [
+							{
+							"title": "Not done yet",
+							"rank": 0
+							},
+							{
+							"title": "No Logging",
+							"rank": 0
+							},
+							{
+							"title": "Not working",
+							"rank": 0
+							},
+							{
+							"title": "One Message",
+							"rank": 1
+							},
+							{
+							"title": "Two Messages",
+							"rank": 2
+							},
+							{
+							"title": "Three Messages",
+							"rank": 3
+							},
+							{
+							"title": "Four Messages",
+							"rank": 4
+							},
+							{
+							"title": "Five Messages",
+							"rank": 5
+							},
+							{
+							"title": "Six Messages",
+							"rank": 6
+							}
+						]
 					},
 					{
-						"name": "Logging Quality"
+						"name": "Logging quality",
+						"points_ranked": "false",
+						"subpoints": [
+							{
+							"title": "Not done yet",
+							"points": 0
+							},
+							{
+							"title": "Not very good",
+							"points": 0.6
+							},
+							{
+							"title": "Decent enough",
+							"points": 0.8
+							},
+							{
+							"title": "Good",
+							"points": 1
+							}
+						]
 					}
 				],
 				"hint": "Useful and informative; Multiple appropriate log levels"
 			},
 			{
-				"name": "Unit Testing"
+				"name": "Unit Testing",
+				"bulletpoints": [
+					{
+						"name": "Testing implementation",
+						"points_ranked": "true",
+						"max_points": 5,
+						"max_rank": 10,
+						"subpoints": [
+							{
+							"title": "Not done yet",
+							"rank": 0
+							},
+							{
+							"title": "No test",
+							"rank": 0
+							},
+							{
+							"title": "One test",
+							"rank": 1
+							},
+							{
+							"title": "Two tests",
+							"rank": 2
+							},
+							{
+							"title": "Three tests",
+							"rank": 3
+							},
+							{
+							"title": "Four tests",
+							"rank": 4
+							},
+							{
+							"title": "Five tests",
+							"rank": 5
+							},
+							{
+							"title": "Six tests",
+							"rank": 6
+							},
+							{
+							"title": "Seven tests",
+							"rank": 7
+							},
+							{
+							"title": "Eight tests",
+							"rank": 8
+							},
+							{
+							"title": "Eight tests + Data OR Negative",
+							"rank": 9
+							},
+							{
+							"title": "Eight tests + Data AND Negative",
+							"rank": 10
+							}
+						]
+					},
+					{
+						"name": "Unit testing quality",
+						"points_ranked": "false",
+						"subpoints": [
+							{
+							"title": "Not done yet",
+							"points": 0
+							},
+							{
+							"title": "Not very good",
+							"points": 0.6
+							},
+							{
+							"title": "Decent enough",
+							"points": 0.8
+							},
+							{
+							"title": "Good",
+							"points": 1
+							}
+						]
+					},
+					{
+						"name": "Coverage",
+						"points_ranked": "true",
+						"max_points": 1,
+						"max_rank": 12,
+						"subpoints": [
+							{
+							"title": "0%",
+							"rank" : 0
+							},
+							{
+							"title": "5%",
+							"rank": 1
+							},
+							{
+							"title": "10%",
+							"rank": 2
+							},
+							{
+							"title": "15%",
+							"rank": 3
+							},
+							{
+							"title": "20%",
+							"rank": 4
+							},
+							{
+							"title": "25%",
+							"rank": 5
+							},
+							{
+							"title": "30%",
+							"rank": 6
+							},
+							{
+							"title": "35%",
+							"rank": 7
+							},
+							{
+							"title": "40%",
+							"rank": 8
+							},
+							{
+							"title": "45%",
+							"rank": 9
+							},
+							{
+							"title": "50%",
+							"rank": 10
+							},
+							{
+							"title": "55%",
+							"rank": 11
+							},
+							{
+							"title": "> 60%",
+							"rank": 12
+							}
+						]
+					}
+				],
+				"hint": "Tests only count if they test logic, no Getters/Setters! If not isolated from external dependencies then lower the quality! (e.g testing network with our server = bad!). Take a look at the naming scheme!"
 			},
 			{
-				"name": "Error Handling"
+				"name": "Error Handling",
+				"bulletpoints": [
+					{
+						"name": "Error Handling - Exceptions",
+						"points_ranked": "true",
+						"max_points": 2.5,
+						"max_rank": 4,
+						"subpoints": [
+							{
+							"title": "Not done yet",
+							"rank": 0
+							},
+							{
+							"title": "Missing",
+							"rank": 0
+							},
+							{
+							"title": "Both exception types present",
+							"rank": 4
+							},
+							{
+							"title": "Checked exceptions",
+							"rank": 2
+							},
+							{
+							"title": "Unchecked exceptions",
+							"rank": 2
+							},
+							{
+							"title": "Both exception types partially present",
+							"rank": 2
+							},
+							{
+							"title": "Partial checked exceptions",
+							"rank": 1
+							},
+							{
+							"title": "Partial unchecked exceptions",
+							"rank": 1
+							}
+						]
+					},
+					{
+						"name": "Error handling quality",
+						"points_ranked": "false",
+						"subpoints": [
+							{
+							"title": "Not done yet",
+							"points": 0
+							},
+							{
+							"title": "Not very good",
+							"points": 0.6
+							},
+							{
+							"title": "Decent enough",
+							"points": 0.8
+							},
+							{
+							"title": "Good",
+							"points": 1
+							}
+						]
+					}
+				],
+				"hint": "Count only if cought, processed and logged/ printed to user"
 			} ,
 			{
-				"name": "Zeitdokumentation"
+				"name": "Documentation of time",
+				"bulletpoints": [
+					{
+						"name": "Invested hours, estimation vs. reality",
+						"points_ranked": "false",
+						"subpoints": [
+							{
+							"title": "Not done yet",
+							"points": 0
+							},
+							{
+							"title": "Missing",
+							"points": 0
+							},
+							{
+							"title": "Not very good",
+							"points": 0.6
+							},
+							{
+							"title": "Decent enough",
+							"points": 0.8
+							},
+							{
+							"title": "Good",
+							"points": 1
+							}
+						]
+					}
+				],
+				"hint": "Is it there? Then give the points"
 			}
 		]
 	}
