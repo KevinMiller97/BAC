@@ -5,67 +5,82 @@
 		"segments": [
 			{
 				"name": "Step one: Preparation",
-				"points_ranked": "false",
 				"subpoints": [
 					{
-					"title": "Not done yet",
-					"points": 0
-					},
-					{
-					"title": "Failed (No Code)",
-					"points": 0
-					},
-					{
-					"title": "Failed (Import or Jar Building)",
-					"points": 0.8
-					},
-					{
-					"title": "Succeeded (Import and Jar Building)",
-					"points": 1
+						"name": "Preparation result",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "Failed (No Code)",
+							"points": 0
+							},
+							{
+							"name": "Failed (Import or Jar Building)",
+							"points": 0.8
+							},
+							{
+							"name": "Succeeded (Import and Jar Building)",
+							"points": 1
+							}
+						]
 					}
 				]
 			},
 			{
 				"name": "Step two: Automatic Evaluation",
-				"points_ranked": "false",
 				"subpoints": [
 					{
-					"title": "Not done yet",
-					"points": 0
-					},
-					{
-					"title": "Failed",
-					"points": 0
-					},
-					{
-					"title": "Succeeded",
-					"points": 1
+						"name": "Automatic evaluation", 
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "Failed",
+							"points": 0
+							},
+							{
+							"name": "Succeeded",
+							"points": 1
+							}
+						]
 					}
 				]
 			},
 			{
 				"name": "Step three: Implementation Progress",
-				"points_ranked": "false",
 				"subpoints": [
 					{
-					"title": "0-2 Features implemented in time",
-					"points": 0
-					},
-					{
-					"title": "3 Features implemented in time",
-					"points": 0.25
-					},
-					{
-					"title": "4 Features implemented in time",
-					"points": 0.5
-					},
-					{
-					"title": "5 Features implemented in time",
-					"points": 0.75
-					},
-					{
-					"title": "6 Features implemented in time",
-					"points": 1
+						"name": "Progress",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "0-2 Features implemented in time",
+							"points": 0
+							},
+							{
+							"name": "3 Features implemented in time",
+							"points": 0.25
+							},
+							{
+							"name": "4 Features implemented in time",
+							"points": 0.5
+							},
+							{
+							"name": "5 Features implemented in time",
+							"points": 0.75
+							},
+							{
+							"name": "6 Features implemented in time",
+							"points": 1
+							}
+						]
 					}
 				]
 			} 
@@ -76,47 +91,47 @@
 		"segments": [
 			{
 				"name": "Logging",
-				"bulletpoints": [
+				"subpoints": [
 					{
 						"name": "Log implementation",
 						"points_ranked": "true",
 						"max_points": 1,
 						"max_rank": 6,
-						"subpoints": [
+						"subpointentries": [
 							{
-							"title": "Not done yet",
+							"name": "Not done yet",
 							"rank": 0
 							},
 							{
-							"title": "No Logging",
+							"name": "No Logging",
 							"rank": 0
 							},
 							{
-							"title": "Not working",
+							"name": "Not working",
 							"rank": 0
 							},
 							{
-							"title": "One Message",
+							"name": "One Message",
 							"rank": 1
 							},
 							{
-							"title": "Two Messages",
+							"name": "Two Messages",
 							"rank": 2
 							},
 							{
-							"title": "Three Messages",
+							"name": "Three Messages",
 							"rank": 3
 							},
 							{
-							"title": "Four Messages",
+							"name": "Four Messages",
 							"rank": 4
 							},
 							{
-							"title": "Five Messages",
+							"name": "Five Messages",
 							"rank": 5
 							},
 							{
-							"title": "Six Messages",
+							"name": "Six Messages",
 							"rank": 6
 							}
 						]
@@ -124,21 +139,21 @@
 					{
 						"name": "Logging quality",
 						"points_ranked": "false",
-						"subpoints": [
+						"subpointentries": [
 							{
-							"title": "Not done yet",
+							"name": "Not done yet",
 							"points": 0
 							},
 							{
-							"title": "Not very good",
+							"name": "Not very good",
 							"points": 0.6
 							},
 							{
-							"title": "Decent enough",
+							"name": "Decent enough",
 							"points": 0.8
 							},
 							{
-							"title": "Good",
+							"name": "Good",
 							"points": 1
 							}
 						]
@@ -148,59 +163,59 @@
 			},
 			{
 				"name": "Unit Testing",
-				"bulletpoints": [
+				"subpoints": [
 					{
 						"name": "Testing implementation",
 						"points_ranked": "true",
 						"max_points": 5,
 						"max_rank": 10,
-						"subpoints": [
+						"subpointentries": [
 							{
-							"title": "Not done yet",
+							"name": "Not done yet",
 							"rank": 0
 							},
 							{
-							"title": "No test",
+							"name": "No test",
 							"rank": 0
 							},
 							{
-							"title": "One test",
+							"name": "One test",
 							"rank": 1
 							},
 							{
-							"title": "Two tests",
+							"name": "Two tests",
 							"rank": 2
 							},
 							{
-							"title": "Three tests",
+							"name": "Three tests",
 							"rank": 3
 							},
 							{
-							"title": "Four tests",
+							"name": "Four tests",
 							"rank": 4
 							},
 							{
-							"title": "Five tests",
+							"name": "Five tests",
 							"rank": 5
 							},
 							{
-							"title": "Six tests",
+							"name": "Six tests",
 							"rank": 6
 							},
 							{
-							"title": "Seven tests",
+							"name": "Seven tests",
 							"rank": 7
 							},
 							{
-							"title": "Eight tests",
+							"name": "Eight tests",
 							"rank": 8
 							},
 							{
-							"title": "Eight tests + Data OR Negative",
+							"name": "Eight tests + Data OR Negative",
 							"rank": 9
 							},
 							{
-							"title": "Eight tests + Data AND Negative",
+							"name": "Eight tests + Data AND Negative",
 							"rank": 10
 							}
 						]
@@ -208,21 +223,21 @@
 					{
 						"name": "Unit testing quality",
 						"points_ranked": "false",
-						"subpoints": [
+						"subpointentries": [
 							{
-							"title": "Not done yet",
+							"name": "Not done yet",
 							"points": 0
 							},
 							{
-							"title": "Not very good",
+							"name": "Not very good",
 							"points": 0.6
 							},
 							{
-							"title": "Decent enough",
+							"name": "Decent enough",
 							"points": 0.8
 							},
 							{
-							"title": "Good",
+							"name": "Good",
 							"points": 1
 							}
 						]
@@ -232,57 +247,57 @@
 						"points_ranked": "true",
 						"max_points": 1,
 						"max_rank": 12,
-						"subpoints": [
+						"subpointentries": [
 							{
-							"title": "0%",
+							"name": "0%",
 							"rank" : 0
 							},
 							{
-							"title": "5%",
+							"name": "5%",
 							"rank": 1
 							},
 							{
-							"title": "10%",
+							"name": "10%",
 							"rank": 2
 							},
 							{
-							"title": "15%",
+							"name": "15%",
 							"rank": 3
 							},
 							{
-							"title": "20%",
+							"name": "20%",
 							"rank": 4
 							},
 							{
-							"title": "25%",
+							"name": "25%",
 							"rank": 5
 							},
 							{
-							"title": "30%",
+							"name": "30%",
 							"rank": 6
 							},
 							{
-							"title": "35%",
+							"name": "35%",
 							"rank": 7
 							},
 							{
-							"title": "40%",
+							"name": "40%",
 							"rank": 8
 							},
 							{
-							"title": "45%",
+							"name": "45%",
 							"rank": 9
 							},
 							{
-							"title": "50%",
+							"name": "50%",
 							"rank": 10
 							},
 							{
-							"title": "55%",
+							"name": "55%",
 							"rank": 11
 							},
 							{
-							"title": "> 60%",
+							"name": "> 60%",
 							"rank": 12
 							}
 						]
@@ -292,43 +307,43 @@
 			},
 			{
 				"name": "Error Handling",
-				"bulletpoints": [
+				"subpoints": [
 					{
 						"name": "Error Handling - Exceptions",
 						"points_ranked": "true",
 						"max_points": 2.5,
 						"max_rank": 4,
-						"subpoints": [
+						"subpointentries": [
 							{
-							"title": "Not done yet",
+							"name": "Not done yet",
 							"rank": 0
 							},
 							{
-							"title": "Missing",
+							"name": "Missing",
 							"rank": 0
 							},
 							{
-							"title": "Both exception types present",
+							"name": "Both exception types present",
 							"rank": 4
 							},
 							{
-							"title": "Checked exceptions",
+							"name": "Checked exceptions",
 							"rank": 2
 							},
 							{
-							"title": "Unchecked exceptions",
+							"name": "Unchecked exceptions",
 							"rank": 2
 							},
 							{
-							"title": "Both exception types partially present",
+							"name": "Both exception types partially present",
 							"rank": 2
 							},
 							{
-							"title": "Partial checked exceptions",
+							"name": "Partial checked exceptions",
 							"rank": 1
 							},
 							{
-							"title": "Partial unchecked exceptions",
+							"name": "Partial unchecked exceptions",
 							"rank": 1
 							}
 						]
@@ -336,21 +351,21 @@
 					{
 						"name": "Error handling quality",
 						"points_ranked": "false",
-						"subpoints": [
+						"subpointentries": [
 							{
-							"title": "Not done yet",
+							"name": "Not done yet",
 							"points": 0
 							},
 							{
-							"title": "Not very good",
+							"name": "Not very good",
 							"points": 0.6
 							},
 							{
-							"title": "Decent enough",
+							"name": "Decent enough",
 							"points": 0.8
 							},
 							{
-							"title": "Good",
+							"name": "Good",
 							"points": 1
 							}
 						]
@@ -360,29 +375,29 @@
 			} ,
 			{
 				"name": "Documentation of time",
-				"bulletpoints": [
+				"subpoints": [
 					{
 						"name": "Invested hours, estimation vs. reality",
 						"points_ranked": "false",
-						"subpoints": [
+						"subpointentries": [
 							{
-							"title": "Not done yet",
+							"name": "Not done yet",
 							"points": 0
 							},
 							{
-							"title": "Missing",
+							"name": "Missing",
 							"points": 0
 							},
 							{
-							"title": "Not very good",
+							"name": "Not very good",
 							"points": 0.6
 							},
 							{
-							"title": "Decent enough",
+							"name": "Decent enough",
 							"points": 0.8
 							},
 							{
-							"title": "Good",
+							"name": "Good",
 							"points": 1
 							}
 						]

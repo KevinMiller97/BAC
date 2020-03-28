@@ -1,6 +1,6 @@
 module com.kevinmiller.gradingsupport {
-    requires javafx.controls;
-    requires javafx.fxml;
+	requires javafx.controls;
+	requires javafx.fxml;
 	requires jnativehook;
 	requires javafx.graphics;
 	requires java.logging;
@@ -8,6 +8,9 @@ module com.kevinmiller.gradingsupport {
 	requires java.base;
 	requires org.apache.commons.io;
 
-    opens com.kevinmiller.gradingsupport to javafx.fxml;
-    exports com.kevinmiller.gradingsupport;
+	opens com.kevinmiller.gradingsupport to javafx.fxml;
+	opens com.kevinmiller.gradingsupport.fxgui to javafx.fxml;
+	opens com.kevinmiller.gradingsupport.fxgui.controls to javafx.fxml;
+
+	exports com.kevinmiller.gradingsupport;
 }

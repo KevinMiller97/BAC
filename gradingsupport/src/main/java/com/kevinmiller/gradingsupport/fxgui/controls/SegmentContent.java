@@ -1,5 +1,7 @@
 package com.kevinmiller.gradingsupport.fxgui.controls;
 
+import java.util.ArrayList;
+
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 import javafx.fxml.FXML;
@@ -11,7 +13,8 @@ public class SegmentContent extends AnchorPane {
 	@FXML
 	private VBox content;
 
-	public SegmentContent() {
+	public SegmentContent(ArrayList<SubPoint> subPoints) {
 		ScreenHelper.loadFXML(this, this);
+		content.getChildren().addAll(subPoints);
 	}
 }

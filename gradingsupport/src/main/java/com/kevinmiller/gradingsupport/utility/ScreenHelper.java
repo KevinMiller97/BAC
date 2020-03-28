@@ -49,6 +49,7 @@ public final class ScreenHelper {
 
 		} catch (LoadException e) {
 			logger.log(Level.SEVERE, "LoadException in ScreenHelper " + e.getMessage(), e);
+			e.printStackTrace();
 		} catch (NullPointerException e) {
 			logger.log(Level.SEVERE, "NullPointerException in ScreenHelper " + e.getMessage(), e);
 		} catch (IOException e) {

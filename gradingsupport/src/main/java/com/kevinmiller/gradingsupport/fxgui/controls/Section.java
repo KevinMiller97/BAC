@@ -1,5 +1,7 @@
 package com.kevinmiller.gradingsupport.fxgui.controls;
 
+import java.util.ArrayList;
+
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 import javafx.scene.control.TabPane;
@@ -15,8 +17,16 @@ import javafx.scene.control.TabPane;
  */
 public class Section extends TabPane {
 
-	public Section() {
+	private String title;
+
+	public Section(String title, ArrayList<Segment> segments) {
 		ScreenHelper.loadFXML(this, this);
+		this.title = title;
+		getTabs().addAll(segments);
+	}
+
+	public String getTitle() {
+		return title;
 	}
 
 }

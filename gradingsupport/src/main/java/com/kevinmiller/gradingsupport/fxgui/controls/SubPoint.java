@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 public class SubPoint extends VBox {
 
 	@FXML
-	private Label topic;
+	private Label label;
 
 	@FXML
 	private MenuButton dropdownMenu;
@@ -21,7 +21,7 @@ public class SubPoint extends VBox {
 
 	public SubPoint(String topic, ArrayList<SubPointEntry> entries) {
 		ScreenHelper.loadFXML(this, this);
-		this.topic.setText(topic);
+		label.setText(topic);
 
 		for (SubPointEntry entry : entries) {
 			MenuItem option = new MenuItem(entry.getTitle());

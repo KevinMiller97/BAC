@@ -16,13 +16,12 @@ public class JSONReader {
 	static final String configLocation = "/config/appconfig.json";
 	final static Logger logger = Logger.getLogger(ScreenHelper.class.getName());
 
-	public static JSONObject loadConfiguration() throws JSONException {
+	public static void loadConfigurationAndInitializeApplication() throws JSONException {
 		ScreenHelper.configureLogger(logger);
-
 		try {
 			String configRead = IOUtils.toString(JSONReader.class.getResourceAsStream(configLocation), "UTF-8");
-			JSONObject configuration = new JSONObject(configRead);
-			return configuration;
+			JSONInterpreter.initializeGUIContent(new JSONObject(configRead));
+			return;
 		} catch (FileNotFoundException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		} catch (IOException e) {
@@ -32,6 +31,5 @@ public class JSONReader {
 		}
 		logger.log(Level.SEVERE, "Could not load configuration, stopping Application");
 		System.exit(1);
-		return null;
 	}
 }
