@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
-public class JSONReader {
+public final class JSONReader {
 
 	static final String configLocation = "/config/appconfig.json";
 	final static Logger logger = Logger.getLogger(ScreenHelper.class.getName());
