@@ -1,10 +1,10 @@
 {
 "sections" : [
 	{
-		"name": "Grading Part One",
+		"name": "Part One",
 		"segments": [
 			{
-				"name": "Step one: Preparation",
+				"name": "Preparation",
 				"subpoints": [
 					{
 						"name": "Preparation result",
@@ -31,7 +31,7 @@
 				]
 			},
 			{
-				"name": "Step two: Automatic Evaluation",
+				"name": "Automatic Evaluation",
 				"subpoints": [
 					{
 						"name": "Automatic evaluation", 
@@ -54,10 +54,11 @@
 				]
 			},
 			{
-				"name": "Step three: Implementation Progress",
+				"name": "Implementation Progress",
 				"subpoints": [
 					{
 						"name": "Progress",
+						"bonus": "true",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -87,7 +88,7 @@
 		] 
 	},
 	{
-		"name" : "Grading Part Two",
+		"name" : "Part Two",
 		"segments": [
 			{
 				"name": "Logging",
@@ -404,6 +405,554 @@
 					}
 				],
 				"hint": "Is it there? Then give the points"
+			}
+		]
+	},
+	{
+		"name": "Part Three",
+		"segments": [
+			{
+				"name": "Network communication",
+				"subpoints": [
+					{
+						"name": "Solution copied factor",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "Copied from other students",
+							"points": 0
+							},
+							{
+							"name": "Mostly copied, but integrated",
+							"points": 0.4
+							},
+							{
+							"name": "Copied, but heavily adapted",
+							"points": 0.7
+							},
+							{
+							"name": "Completely own solution",
+							"points": 1
+							}
+						]
+					},
+					{
+					"name": "Network implementation",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "Implemented",
+							"points": 2
+							}
+						]
+					},
+					{
+						"name": "Network implementation quality",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "Not very good",
+							"points": 0.6
+							},
+							{
+							"name": "Decent enough",
+							"points": 0.8
+							},
+							{
+							"name": "Good",
+							"points": 1
+							}
+						]
+					}
+				],
+				"hint": "Quality: different methods, error handling, own class, network messages are NOT returned"
+			},
+			{
+				"name": "User Interface",
+				"subpoints": [
+					{
+						"name": "All map tiles & terrains",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "No",
+							"points": 0
+							},
+							{
+							"name": "Partly",
+							"points": 0.2
+							},
+							{
+							"name": "Yes",
+							"points": 0.4
+							}
+						]
+					},
+					{
+						"name": "Both players visible",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "No",
+							"points": 0
+							},
+							{
+							"name": "Partly",
+							"points": 0.2
+							},
+							{
+							"name": "Yes",
+							"points": 0.4
+							}
+						]
+					},
+					{
+						"name": "Own fort & treasure",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "No",
+							"points": 0
+							},
+							{
+							"name": "Partly",
+							"points": 0.2
+							},
+							{
+							"name": "Yes",
+							"points": 0.4
+							}
+						]
+					},
+					{
+						"name": "Enemy fort and treasure",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "No",
+							"points": 0
+							},
+							{
+							"name": "Partly",
+							"points": 0.2
+							},
+							{
+							"name": "Yes",
+							"points": 0.4
+							}
+						]
+					},
+					{
+						"name": "Won/Lost game reported",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "No",
+							"points": 0
+							},
+							{
+							"name": "Partly",
+							"points": 0.2
+							},
+							{
+							"name": "Yes",
+							"points": 0.4
+							}
+						]
+					},
+					{
+						"name": "CLI UI Implementation quality",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "Not very good",
+							"points": 0.6
+							},
+							{
+							"name": "Decent enough",
+							"points": 0.8
+							},
+							{
+							"name": "Good",
+							"points": 1
+							}
+						]
+					},
+					{
+						"name": "Advanced 2D Interface",
+						"bonus": "true",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "No",
+							"points": 0
+							},
+							{
+							"name": "Basic 2D GUI",
+							"points": 1
+							},
+							{
+							"name": "Fancy 2D GUI",
+							"points": 2
+							}
+						]
+					}
+				],
+				"hint": "Basic 2D = only colors, Fancy 2D = icons/images"
+			},
+			{
+				"name": "Model View Controller",
+				"subpoints": [
+					{
+						"name": "MVC implemented",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "No",
+							"points": 0
+							},
+							{
+							"name": "Yes",
+							"points": 2
+							}
+						]
+					},
+					{
+						"name": "MVC implementation quality",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "Has MVC classes",
+							"points": 0.25
+							},
+							{
+							"name": "Has Observer Pattern",
+							"points": 0.5
+							},
+							{
+							"name": "Good",
+							"points": 1
+							}
+						]
+					}
+				],
+				"hint": "MVC must use the Java Observable & Observer pattern and USE IT. No public methods in view!"
+			},
+			{
+				"name": "Map Generation",
+				"subpoints": [
+					{
+						"name": "Solution copied factor",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "Copied from other students",
+							"points": 0
+							},
+							{
+							"name": "Mostly copied, but integrated",
+							"points": 0.4
+							},
+							{
+							"name": "Copied, but heavily adapted",
+							"points": 0.7
+							},
+							{
+							"name": "Completely own solution",
+							"points": 1
+							}
+						]
+					},
+					{
+					"name": "Map generation implementation",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "Not random/predefined list",
+							"points": 0
+							},
+							{
+							"name": "Random generation",
+							"points": 4
+							}
+						]
+					},
+					{
+						"name": "Map implementation quality",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "Not very good",
+							"points": 0.6
+							},
+							{
+							"name": "Decent enough",
+							"points": 0.8
+							},
+							{
+							"name": "Good",
+							"points": 1
+							}
+						]
+					}
+				],
+				"hint": "Fields are assigned with loops and if's, no hard coded field lists; multiple methods"
+			},
+			{
+				"name": "Artificial Intelligence",
+				"subpoints": [
+					{
+						"name": "Solution copied factor",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "Copied from other students",
+							"points": 0
+							},
+							{
+							"name": "Mostly copied, but integrated",
+							"points": 0.4
+							},
+							{
+							"name": "Copied, but heavily adapted",
+							"points": 0.7
+							},
+							{
+							"name": "Completely own solution",
+							"points": 1
+							}
+						]
+					},
+					{
+					"name": "Artificial intelligence",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "No real path finding",
+							"points": 2
+							},
+							{
+							"name": "Other algorithm",
+							"points": 4
+							},
+							{
+							"name": "Shortest path",
+							"points": 5
+							}
+						]
+					},
+					{
+						"name": "AI quality",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "Not very good",
+							"points": 0.6
+							},
+							{
+							"name": "Decent enough",
+							"points": 0.8
+							},
+							{
+							"name": "Good",
+							"points": 1
+							}
+						]
+					}
+				],
+				"hint": "Quality factors: multiple methods, implementation style, readibility, encapsulation"
+			},
+			{
+				"name": "Implementation quality",
+				"subpoints": [
+					{
+						"name": "Clear architecture; >5 packages; >10 classes",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": -0.05
+							},
+							{
+							"name": "No",
+							"points": -0.05
+							},
+							{
+							"name": "Yes",
+							"points": 0
+							}
+						]
+					},
+					{
+						"name": "Visibility/encapsulation (public/private methods)",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": -0.05
+							},
+							{
+							"name": "No",
+							"points": -0.05
+							},
+							{
+							"name": "Yes",
+							"points": 0
+							}
+						]
+					},
+					{
+						"name": "Single responsibility of classes and methods",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": -0.05
+							},
+							{
+							"name": "No",
+							"points": -0.05
+							},
+							{
+							"name": "Yes",
+							"points": 0
+							}
+						]
+					},
+					{
+						"name": "Code separation in multiple methods",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": -0.05
+							},
+							{
+							"name": "No",
+							"points": -0.05
+							},
+							{
+							"name": "Yes",
+							"points": 0
+							}
+						]
+					},
+					{
+						"name": "Separate data & network messages",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": -0.05
+							},
+							{
+							"name": "No",
+							"points": -0.05
+							},
+							{
+							"name": "Yes",
+							"points": 0
+							}
+						]
+					}
+				],
+				"hint": "Quick quality impression, if the quality is ~OK and the principle was at least partly fulfilled give a YES"
+			},
+			{
+				"name": "GIT",
+				"subpoints": [
+					{
+						"name": ">10 reasonable GIT commits",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": -0.05
+							},
+							{
+							"name": "No",
+							"points": -0.05
+							},
+							{
+							"name": "Yes",
+							"points": 0
+							}
+						]
+					}
+				],
+				"hint": "Rough estimation of if GIT was used as intended"
 			}
 		]
 	}
