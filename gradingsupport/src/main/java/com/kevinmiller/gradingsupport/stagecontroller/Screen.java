@@ -50,7 +50,7 @@ public class Screen {
 		});
 		stage.setTitle("Grading Support System"); // TODO add proper title
 
-		GlobalScreen.addNativeKeyListener(new GlobalKeyListener());
+		GlobalScreen.addNativeKeyListener(new GlobalKeyListener(stage));
 		try {
 			GlobalScreen.registerNativeHook();
 		} catch (NativeHookException ex) {

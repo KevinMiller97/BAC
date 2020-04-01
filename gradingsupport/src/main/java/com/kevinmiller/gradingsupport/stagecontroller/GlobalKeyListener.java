@@ -7,6 +7,9 @@ import org.jnativehook.GlobalScreen;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
+import javafx.application.Platform;
+import javafx.stage.Stage;
+
 // https://github.com/kwhat/jnativehook/releases
 // https://stackoverflow.com/questions/26216864/registering-multi-key-presses-with-jnativehook
 
@@ -20,12 +23,14 @@ public class GlobalKeyListener implements NativeKeyListener {
 
 	final Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
 	private boolean ctrl = false;
+	private final Stage stage;
 
-	public GlobalKeyListener() {
+	public GlobalKeyListener(Stage stage) {
 		// Get the logger for "org.jnativehook" and set the level to warning.
 		// Set level to warning or else it spams the console
 		logger.setLevel(Level.WARNING);
 		logger.setUseParentHandlers(false);
+		this.stage = stage;
 	}
 
 	@Override
@@ -34,10 +39,18 @@ public class GlobalKeyListener implements NativeKeyListener {
 			ctrl = true;
 		} else if (e.getKeyCode() == NativeKeyEvent.VC_B) {
 			if (ctrl) {
+				Platform.runLater(() -> {
+					bringToFront();
+				});
 				System.out.println("CTRL+B combination pressed");
-				// TODO: key combination activated, bring screen to front
 			}
 		}
+	}
+
+	private void bringToFront() {
+		stage.setAlwaysOnTop(true);
+		stage.requestFocus();
+		stage.setAlwaysOnTop(false);
 	}
 
 	@Override
