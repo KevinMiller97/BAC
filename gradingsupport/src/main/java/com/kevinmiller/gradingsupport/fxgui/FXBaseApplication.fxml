@@ -3,5 +3,19 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 
-<fx:root type="TabPane" side="TOP" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"/>
+<fx:root type="StackPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<BorderPane>
+		   <center>
+		      <TabPane fx:id="sectionPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER"/>
+		   </center>
+		   <bottom>
+		      <StackPane fx:id="footerWrapper" BorderPane.alignment="CENTER" />
+		   </bottom>
+	</BorderPane>
+	<StackPane fx:id="notificationWrapper" pickOnBounds="false" />
+	</children>
+</fx:root>

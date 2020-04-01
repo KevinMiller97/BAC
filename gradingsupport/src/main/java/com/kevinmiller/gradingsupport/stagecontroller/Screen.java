@@ -6,16 +6,12 @@ import org.jnativehook.NativeHookException;
 import com.kevinmiller.gradingsupport.fxgui.FXBaseApplication;
 
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Screen {
 
 	private final FXBaseApplication base = new FXBaseApplication();
-	private final StackPane footerWrapper = new StackPane();
-	private final StackPane notificationWrapper = new StackPane();
 
 	final Stage stage;
 	private final Rectangle bounds;
@@ -26,14 +22,7 @@ public class Screen {
 		this.bounds = bounds;
 		this.name = name;
 
-		notificationWrapper.setPickOnBounds(false);
-
-		StackPane root = new StackPane();
-		root.setPickOnBounds(false);
-		root.getChildren().add(new BorderPane(base, null, null, footerWrapper, null));
-		root.getChildren().add(notificationWrapper);
-
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(base);
 //		scene.getStylesheets().add(e) TODO
 
 		stage.setX(bounds.getX());
