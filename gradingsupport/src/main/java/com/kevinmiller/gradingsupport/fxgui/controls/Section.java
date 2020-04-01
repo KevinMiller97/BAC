@@ -44,4 +44,13 @@ public class Section extends TabPane {
 		return sb.toString();
 	}
 
+	public double getPoints() {
+		double points = 0;
+		for (Segment s : segments) {
+			System.out.println(s.getTitle() + " " + s.getPoints());
+			points += s.getPoints();
+		}
+		return points;
+	}
+
 }

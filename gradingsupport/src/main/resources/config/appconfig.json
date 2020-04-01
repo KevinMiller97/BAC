@@ -350,6 +350,24 @@
 						]
 					},
 					{
+						"name": "Try Catch multiple exceptions",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Not done yet",
+							"points": 0
+							},
+							{
+							"name": "Shown",
+							"points": 0.5
+							},
+							{
+							"name": "Not shown",
+							"points": 0
+							}
+						]
+					},
+					{
 						"name": "Error handling quality",
 						"points_ranked": "false",
 						"subpointentries": [

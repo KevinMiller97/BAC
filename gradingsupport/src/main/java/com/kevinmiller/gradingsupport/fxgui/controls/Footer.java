@@ -1,4 +1,4 @@
-package com.kevinmiller.gradingsupport.fxgui;
+package com.kevinmiller.gradingsupport.fxgui.controls;
 
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
@@ -22,6 +22,10 @@ public class Footer extends HBox {
 		ScreenHelper.loadFXML(this, this);
 		studentNameLabel.setText(studentName);
 		studentIdLabel.setText(studentId);
+	}
+
+	public void setOnFinishButtonPressed(Runnable buttonPress) {
+		finishButton.setOnAction(value -> buttonPress.run());
 	}
 
 }

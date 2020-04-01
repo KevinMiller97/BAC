@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import org.json.JSONException;
 
+import com.kevinmiller.gradingsupport.fxgui.controls.Footer;
 import com.kevinmiller.gradingsupport.fxgui.controls.Section;
-import com.kevinmiller.gradingsupport.json.JSONInterpreter;
 import com.kevinmiller.gradingsupport.json.JSONReader;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
@@ -22,19 +22,31 @@ public class FXBaseApplication extends StackPane {
 	@FXML
 	private TabPane sectionPane;
 
+	private Footer footer;
+	private ArrayList<Section> sections;
+
 	public FXBaseApplication() {
 		ScreenHelper.loadFXML(this, this);
 		try {
 			JSONReader.loadConfigurationAndInitializeApplication();
-			while (!JSONInterpreter.getSections().isPresent()) {
+			while (!JSONReader.getSections().isPresent()) {
 				// wait
 			}
-			ArrayList<Section> sections = JSONInterpreter.getSections().get();
+			sections = JSONReader.getSections().get();
 			for (Section s : sections) {
 				sectionPane.getTabs().add(new Tab(s.getTitle(), s));
 			}
+			footer = new Footer("Kevin Miller", "01638797");
+			footer.setOnFinishButtonPressed(() -> {
+				double points = 0;
+				for (Section s : sections) {
+					System.out.println(s.getTitle() + " " + s.getPoints());
+					points += s.getPoints();
+				}
+				System.out.println(points);
+			});
 
-			footerWrapper.getChildren().add(new Footer("Kevin Miller", "01638797"));// TODO
+			footerWrapper.getChildren().add(footer);// TODO
 
 		} catch (JSONException e) {
 
