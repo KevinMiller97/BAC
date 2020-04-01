@@ -88,6 +88,7 @@ public final class JSONInterpreter {
 	private static SubPoint constructSubPoint(JSONObject jSubPoint) throws JSONException {
 		ArrayList<SubPointEntry> subPointEntries = new ArrayList<SubPointEntry>();
 		JSONArray jSubPointEntries = jSubPoint.getJSONArray(subpointentryTerm);
+		// points calculated
 		if (jSubPoint.getBoolean(pointsrankedTerm)) {
 			double maxRank = jSubPoint.getDouble(maxRankTerm);
 			double maxPoints = jSubPoint.getDouble(maxPointsTerm);
@@ -95,6 +96,7 @@ public final class JSONInterpreter {
 				subPointEntries
 						.add(constructSubPointEntryRanked(jSubPointEntries.getJSONObject(i), maxRank, maxPoints));
 			}
+			// points read from json
 		} else {
 			for (int i = 0; i < jSubPointEntries.length(); ++i) {
 				subPointEntries.add(constructSubPointEntry(jSubPointEntries.getJSONObject(i)));
@@ -104,11 +106,17 @@ public final class JSONInterpreter {
 	}
 
 	private static SubPointEntry constructSubPointEntry(JSONObject jSubPointEntry) throws JSONException {
+		if (jSubPointEntry.has("selected"))
+			return new SubPointEntry(jSubPointEntry.getString(nameTerm), jSubPointEntry.getDouble(pointsTerm),
+					jSubPointEntry.getBoolean("selected"));
 		return new SubPointEntry(jSubPointEntry.getString(nameTerm), jSubPointEntry.getDouble(pointsTerm));
 	}
 
 	private static SubPointEntry constructSubPointEntryRanked(JSONObject jSubPointEntry, double maxRank,
 			double maxPoints) throws JSONException {
+		if (jSubPointEntry.has("selected"))
+			return new SubPointEntry(jSubPointEntry.getString(nameTerm), jSubPointEntry.getInt(rankTerm), maxRank,
+					maxPoints, jSubPointEntry.getBoolean("selected"));
 		return new SubPointEntry(jSubPointEntry.getString(nameTerm), jSubPointEntry.getInt(rankTerm), maxRank,
 				maxPoints);
 	}

@@ -37,7 +37,6 @@ public class Screen {
 				System.err.println(e.getMessage());
 			}
 		});
-		stage.setTitle("Grading Support System"); // TODO add proper title
 
 		GlobalScreen.addNativeKeyListener(new GlobalKeyListener(stage));
 		try {

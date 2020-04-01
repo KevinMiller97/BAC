@@ -17,7 +17,7 @@ public class SubPoint extends VBox {
 
 	@FXML
 	private MenuButton dropdownMenu;
-	private SubPointEntry selectedEntry;
+	private SubPointEntry selectedEntry = null;
 
 	public SubPoint(String topic, ArrayList<SubPointEntry> entries) {
 		ScreenHelper.loadFXML(this, this);
@@ -29,9 +29,13 @@ public class SubPoint extends VBox {
 				selectedEntry = entry;
 				dropdownMenu.setText(entry.getTitle());
 			});
+			if (entry.wasSelectedBeforeSession()) {
+				selectedEntry = entry;
+			}
 			dropdownMenu.getItems().add(option);
 		}
-		selectedEntry = entries.get(0);
+		if (selectedEntry == null)
+			selectedEntry = entries.get(0);
 		dropdownMenu.setText(selectedEntry.getTitle());
 	}
 
