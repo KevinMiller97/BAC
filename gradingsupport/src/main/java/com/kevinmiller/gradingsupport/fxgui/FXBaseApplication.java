@@ -37,7 +37,7 @@ public class FXBaseApplication extends StackPane {
 			for (Section s : sections) {
 				sectionPane.getTabs().add(new Tab(s.getTitle(), s));
 			}
-			footer = new Footer("Kevin Miller", "01638797");
+			footer = new Footer();
 			footer.setOnFinishButtonPressed(() -> {
 				double points = 0;
 				for (Section s : sections) {
@@ -45,7 +45,7 @@ public class FXBaseApplication extends StackPane {
 					points += s.getPoints();
 				}
 				System.out.println(points);
-				JSONWriter.generateSaveFile(sections);
+				JSONWriter.generateSaveFile(sections, footer.generateFileName());
 			});
 
 			footerWrapper.getChildren().add(footer);// TODO

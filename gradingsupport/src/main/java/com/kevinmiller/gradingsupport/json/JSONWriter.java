@@ -34,7 +34,7 @@ public final class JSONWriter {
 	private static String selectedTerm;
 	private static String bonusPointsTerm;
 
-	public static void generateSaveFile(ArrayList<Section> sections) {
+	public static void generateSaveFile(ArrayList<Section> sections, String outputFileName) {
 		try {
 			loadTerminology();
 		} catch (IOException e) {
@@ -50,7 +50,7 @@ public final class JSONWriter {
 
 		try {
 			logger.log(Level.INFO, "writing JSON: " + result.toString());
-			FileWriter file = new FileWriter("output.json");
+			FileWriter file = new FileWriter(outputFileName + ".json");
 			file.write(result.toString());
 			file.flush();
 			file.close();
