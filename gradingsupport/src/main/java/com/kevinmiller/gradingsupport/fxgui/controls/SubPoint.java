@@ -18,9 +18,15 @@ public class SubPoint extends VBox {
 	@FXML
 	private MenuButton dropdownMenu;
 	private SubPointEntry selectedEntry = null;
+	private final String topic;
+	private final ArrayList<SubPointEntry> entries;
+	private final boolean bonusPoints;
 
-	public SubPoint(String topic, ArrayList<SubPointEntry> entries) {
+	public SubPoint(String topic, ArrayList<SubPointEntry> entries, boolean bonusPoints) {
 		ScreenHelper.loadFXML(this, this);
+		this.bonusPoints = bonusPoints;
+		this.entries = entries;
+		this.topic = topic;
 		label.setText(topic);
 
 		for (SubPointEntry entry : entries) {
@@ -39,12 +45,24 @@ public class SubPoint extends VBox {
 		dropdownMenu.setText(selectedEntry.getTitle());
 	}
 
-	// TODO
-//	public boolean bonusPoints() {
-//		
-//	}
-
 	public double getPoints() {
 		return selectedEntry.getPoints();
 	}
+
+	public SubPointEntry getSelectedEntry() {
+		return selectedEntry;
+	}
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public boolean isBonusPoints() {
+		return bonusPoints;
+	}
+
+	public ArrayList<SubPointEntry> getEntries() {
+		return entries;
+	}
+
 }

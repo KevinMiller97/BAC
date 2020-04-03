@@ -7,6 +7,7 @@ import org.json.JSONException;
 import com.kevinmiller.gradingsupport.fxgui.controls.Footer;
 import com.kevinmiller.gradingsupport.fxgui.controls.Section;
 import com.kevinmiller.gradingsupport.json.JSONReader;
+import com.kevinmiller.gradingsupport.json.JSONWriter;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 import javafx.fxml.FXML;
@@ -44,6 +45,7 @@ public class FXBaseApplication extends StackPane {
 					points += s.getPoints();
 				}
 				System.out.println(points);
+				JSONWriter.generateSaveFile(sections);
 			});
 
 			footerWrapper.getChildren().add(footer);// TODO

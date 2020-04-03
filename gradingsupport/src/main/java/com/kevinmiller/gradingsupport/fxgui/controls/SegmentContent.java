@@ -18,6 +18,7 @@ public class SegmentContent extends AnchorPane {
 	private Label hintLabel;
 
 	private final ArrayList<SubPoint> subPoints;
+	private String hint;
 
 	public SegmentContent(ArrayList<SubPoint> subPoints) {
 		this(subPoints, null);
@@ -26,6 +27,7 @@ public class SegmentContent extends AnchorPane {
 	public SegmentContent(ArrayList<SubPoint> subPoints, String hint) {
 		ScreenHelper.loadFXML(this, this);
 		this.subPoints = subPoints;
+		this.hint = hint;
 		if (hint != null)
 			hintLabel.setText(hint);
 		else
@@ -40,4 +42,13 @@ public class SegmentContent extends AnchorPane {
 		}
 		return points;
 	}
+
+	public ArrayList<SubPoint> getSubPoints() {
+		return subPoints;
+	}
+
+	public String getHint() {
+		return hint;
+	}
+
 }

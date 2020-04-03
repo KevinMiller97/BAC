@@ -23,4 +23,8 @@ public class Segment extends Tab {
 	public double getPoints() {
 		return content.getPoints();
 	}
+
+	public SegmentContent getSegmentContent() {
+		return content;
+	}
 }

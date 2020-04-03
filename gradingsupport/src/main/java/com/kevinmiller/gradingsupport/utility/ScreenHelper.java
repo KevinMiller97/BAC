@@ -3,6 +3,7 @@ package com.kevinmiller.gradingsupport.utility;
 import java.io.IOException;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Formatter;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -104,6 +105,9 @@ public final class ScreenHelper {
 		ConsoleHandler handler = new ConsoleHandler();
 		Formatter formatter = new LogFormatter();
 		handler.setFormatter(formatter);
+		for (Handler h : logger.getHandlers()) {
+			logger.removeHandler(h);
+		}
 		logger.addHandler(handler);
 	}
 

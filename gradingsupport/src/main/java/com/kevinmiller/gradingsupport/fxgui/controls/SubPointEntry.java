@@ -4,6 +4,10 @@ public class SubPointEntry {
 
 	private String title;
 	private double points;
+	private double rank;
+	private double maxRank;
+	private double maxPoints;
+	private boolean pointsRanked = false;
 	private boolean selectedBeforeSession = false;
 
 	/**
@@ -18,7 +22,9 @@ public class SubPointEntry {
 
 	public SubPointEntry(String title, double rank, double maxRank, double maxPoints, boolean selectedBeforeSession) {
 		this.title = title;
-		this.points = rank == 0 ? 0 : (maxPoints / maxRank) * rank;
+		this.pointsRanked = true;
+		this.maxRank = maxRank;
+		this.maxPoints = maxPoints;
 		this.selectedBeforeSession = selectedBeforeSession;
 	}
 
@@ -37,10 +43,30 @@ public class SubPointEntry {
 	}
 
 	public double getPoints() {
-		return points;
+		return pointsRanked ? (rank == 0 ? 0 : (maxPoints / maxRank) * rank) : points;
 	}
 
 	public boolean wasSelectedBeforeSession() {
+		return selectedBeforeSession;
+	}
+
+	public double getRank() {
+		return rank;
+	}
+
+	public double getMaxRank() {
+		return maxRank;
+	}
+
+	public double getMaxPoints() {
+		return maxPoints;
+	}
+
+	public boolean isPointsRanked() {
+		return pointsRanked;
+	}
+
+	public boolean isSelectedBeforeSession() {
 		return selectedBeforeSession;
 	}
 

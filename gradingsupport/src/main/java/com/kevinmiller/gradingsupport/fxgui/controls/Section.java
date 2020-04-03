@@ -53,4 +53,8 @@ public class Section extends TabPane {
 		return points;
 	}
 
+	public ArrayList<Segment> getSegments() {
+		return segments;
+	}
+
 }

@@ -56,6 +56,8 @@ public final class JSONReader {
 	private static String pointsrankedTerm;
 	private static String maxPointsTerm;
 	private static String maxRankTerm;
+	private static String selectedTerm;
+	private static String bonusPointsTerm;
 
 	static void initializeGUIContent(JSONObject configuration) {
 		ScreenHelper.configureLogger(logger);
@@ -122,21 +124,21 @@ public final class JSONReader {
 				subPointEntries.add(constructSubPointEntry(jSubPointEntries.getJSONObject(i)));
 			}
 		}
-		return new SubPoint(jSubPoint.getString(nameTerm), subPointEntries);
+		return new SubPoint(jSubPoint.getString(nameTerm), subPointEntries, jSubPoint.has(bonusPointsTerm));
 	}
 
 	private static SubPointEntry constructSubPointEntry(JSONObject jSubPointEntry) throws JSONException {
-		if (jSubPointEntry.has("selected"))
+		if (jSubPointEntry.has(selectedTerm))
 			return new SubPointEntry(jSubPointEntry.getString(nameTerm), jSubPointEntry.getDouble(pointsTerm),
-					jSubPointEntry.getBoolean("selected"));
+					jSubPointEntry.getBoolean(selectedTerm));
 		return new SubPointEntry(jSubPointEntry.getString(nameTerm), jSubPointEntry.getDouble(pointsTerm));
 	}
 
 	private static SubPointEntry constructSubPointEntryRanked(JSONObject jSubPointEntry, double maxRank,
 			double maxPoints) throws JSONException {
-		if (jSubPointEntry.has("selected"))
+		if (jSubPointEntry.has(selectedTerm))
 			return new SubPointEntry(jSubPointEntry.getString(nameTerm), jSubPointEntry.getInt(rankTerm), maxRank,
-					maxPoints, jSubPointEntry.getBoolean("selected"));
+					maxPoints, jSubPointEntry.getBoolean(selectedTerm));
 		return new SubPointEntry(jSubPointEntry.getString(nameTerm), jSubPointEntry.getInt(rankTerm), maxRank,
 				maxPoints);
 	}
@@ -153,6 +155,8 @@ public final class JSONReader {
 		pointsrankedTerm = PropertiesHelper.loadProperty("pointsranked");
 		maxPointsTerm = PropertiesHelper.loadProperty("maxpoints");
 		maxRankTerm = PropertiesHelper.loadProperty("maxrank");
+		selectedTerm = PropertiesHelper.loadProperty("selected");
+		bonusPointsTerm = PropertiesHelper.loadProperty("bonuspoints");
 	}
 
 }
