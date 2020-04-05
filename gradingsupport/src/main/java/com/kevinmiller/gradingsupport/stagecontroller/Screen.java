@@ -8,6 +8,7 @@ import com.kevinmiller.gradingsupport.fxgui.FXBaseApplication;
 import javafx.scene.Scene;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Screen {
 
@@ -30,6 +31,8 @@ public class Screen {
 		stage.setWidth(bounds.getWidth());
 		stage.setHeight(bounds.getHeight());
 		stage.setScene(scene);
+		stage.initStyle(StageStyle.UTILITY);
+		stage.setOpacity(0.82);
 		stage.setOnCloseRequest(close -> {
 			try {
 				GlobalScreen.unregisterNativeHook();

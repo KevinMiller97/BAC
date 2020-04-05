@@ -7,6 +7,7 @@ module com.kevinmiller.gradingsupport {
 	requires org.json;
 	requires java.base;
 	requires org.apache.commons.io;
+	requires javafx.base;
 
 	opens com.kevinmiller.gradingsupport to javafx.fxml;
 	opens com.kevinmiller.gradingsupport.fxgui to javafx.fxml;

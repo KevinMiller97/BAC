@@ -17,8 +17,13 @@ import javafx.scene.control.TabPane;
  */
 public class Section extends TabPane {
 
-	private String title;
-	private final ArrayList<Segment> segments;
+	protected String title;
+	protected ArrayList<Segment> segments;
+
+	public Section(String title) {
+		ScreenHelper.loadFXML(this, this);
+		this.title = title;
+	}
 
 	public Section(String title, ArrayList<Segment> segments) {
 		ScreenHelper.loadFXML(this, this);

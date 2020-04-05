@@ -6,6 +6,7 @@ import org.json.JSONException;
 
 import com.kevinmiller.gradingsupport.fxgui.controls.Footer;
 import com.kevinmiller.gradingsupport.fxgui.controls.Section;
+import com.kevinmiller.gradingsupport.fxgui.controls.StartSection;
 import com.kevinmiller.gradingsupport.json.JSONReader;
 import com.kevinmiller.gradingsupport.json.JSONWriter;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
@@ -25,11 +26,15 @@ public class FXBaseApplication extends StackPane {
 
 	private Footer footer;
 	private ArrayList<Section> sections;
+	private StartSection startSection;
 
 	public FXBaseApplication() {
 		ScreenHelper.loadFXML(this, this);
 		try {
 			JSONReader.loadConfigurationAndInitializeApplication();
+			startSection = new StartSection();
+			sectionPane.getTabs().add(new Tab("Start", startSection));
+
 			while (!JSONReader.getSections().isPresent()) {
 				// wait
 			}
@@ -37,7 +42,8 @@ public class FXBaseApplication extends StackPane {
 			for (Section s : sections) {
 				sectionPane.getTabs().add(new Tab(s.getTitle(), s));
 			}
-			footer = new Footer();
+
+			footer = new Footer(startSection.getStudentNameProperty(), startSection.getStudentIdProperty());
 			footer.setOnFinishButtonPressed(() -> {
 				double points = 0;
 				for (Section s : sections) {
@@ -45,7 +51,7 @@ public class FXBaseApplication extends StackPane {
 					points += s.getPoints();
 				}
 				System.out.println(points);
-				JSONWriter.generateSaveFile(sections, footer.generateFileName());
+				JSONWriter.generateSaveFile(sections, startSection.getStudentName(), startSection.getStudentId());
 			});
 
 			footerWrapper.getChildren().add(footer);// TODO

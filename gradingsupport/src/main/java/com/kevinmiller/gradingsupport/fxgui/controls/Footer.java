@@ -2,62 +2,47 @@ package com.kevinmiller.gradingsupport.fxgui.controls;
 
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 public class Footer extends HBox {
 
 	@FXML
-	private Label studentNameLabel;
+	private Label nameLabel;
 
 	@FXML
-	private Label studentIdLabel;
-
-	@FXML
-	private TextField studentNameField;
-
-	@FXML
-	private TextField studentIdField;
+	private Label idLabel;
 
 	@FXML
 	private Button finishButton;
 
-	@FXML
-	private Button enterButton;
-
-	public Footer() {
+	public Footer(StringProperty studentName, StringProperty studentId) {
 		ScreenHelper.loadFXML(this, this);
-		studentNameLabel.setText("Name");
-		studentIdLabel.setText("Matriculation nr.");
-		enterButton.setOnAction(value -> {
-			studentNameLabel.setText(studentNameField.getText());
-			try {
-				// simple check for numbers only
-				Integer.parseInt(studentIdField.getText());
-				// preserve original input
-				studentIdLabel.setText(studentIdField.getText());
-			} catch (Exception e) {
-				studentIdLabel.setText("Invalid!");
+		studentName.addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				setNameLabel(newValue);
 			}
-			getChildren().remove(studentNameField);
-			getChildren().remove(studentIdField);
-			enterButton.setText("Change");
+		});
+		studentId.addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				setIdLabel(newValue);
+			}
 		});
 	}
 
-	public String generateFileName() {
-		return getStudentName().trim().replaceAll("\\s+", "_") + "_" + getStudentId().trim();
+	public void setNameLabel(String name) {
+		nameLabel.setText(name);
 	}
 
-	public String getStudentName() {
-		return studentNameLabel.getText();
-	}
-
-	public String getStudentId() {
-		return studentIdLabel.getText();
+	public void setIdLabel(String id) {
+		idLabel.setText(id);
 	}
 
 	public void setOnFinishButtonPressed(Runnable buttonPress) {

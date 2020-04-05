@@ -12,27 +12,16 @@
    <children>
       <VBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
          <children>
-         <HBox spacing="5.0">
-         <children>
-            <Label fx:id="studentNameLabel"/>
-			<TextField fx:id="studentNameField" prefWidth="70"/>      
-			<Button fx:id="enterButton" text="Enter" />   
-         </children>
-         </HBox>
-         <HBox spacing="5.0">
-         <children>
-            <Label fx:id="studentIdLabel" />
-			<TextField fx:id="studentIdField" prefWidth="70"/>         
-         </children>
-         </HBox>
+            <Label fx:id="nameLabel"/>
+            <Label fx:id="idLabel"/>
          </children>
          <HBox.margin>
-            <Insets left="5.0" />
+            <Insets left="10.0" />
          </HBox.margin>
       </VBox>
       <Button fx:id="finishButton" mnemonicParsing="false" text="Finish" HBox.hgrow="NEVER">
           <HBox.margin>
-            <Insets right="5.0" />
+            <Insets right="10.0" />
          </HBox.margin>
       </Button>
    </children>
