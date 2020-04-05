@@ -17,7 +17,6 @@ import com.kevinmiller.gradingsupport.fxgui.controls.Segment;
 import com.kevinmiller.gradingsupport.fxgui.controls.SegmentContent;
 import com.kevinmiller.gradingsupport.fxgui.controls.SubPoint;
 import com.kevinmiller.gradingsupport.fxgui.controls.SubPointEntry;
-import com.kevinmiller.gradingsupport.utility.PropertiesHelper;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 public final class JSONReader {
@@ -31,6 +30,7 @@ public final class JSONReader {
 	public static void loadConfigurationAndInitializeApplication() throws JSONException {
 		ScreenHelper.configureLogger(logger);
 		try {
+			JSONUtil.loadTerminology();
 			String configRead = IOUtils.toString(JSONReader.class.getResourceAsStream(configLocation), "UTF-8");
 			initializeGUIContent(new JSONObject(configRead));
 			return;
@@ -45,30 +45,9 @@ public final class JSONReader {
 		System.exit(1);
 	}
 
-	private static String sectionTerm;
-	private static String segmentTerm;
-	private static String subpointTerm;
-	private static String subpointentryTerm;
-	private static String hintTerm;
-	private static String nameTerm;
-	private static String pointsTerm;
-	private static String rankTerm;
-	private static String pointsrankedTerm;
-	private static String maxPointsTerm;
-	private static String maxRankTerm;
-	private static String selectedTerm;
-	private static String bonusPointsTerm;
-
 	static void initializeGUIContent(JSONObject configuration) {
 		ScreenHelper.configureLogger(logger);
-		try {
-			loadTerminology();
-		} catch (IOException e) {
-			e.printStackTrace(); // TODO communicate to user
-			return;
-		}
-
-		JSONArray jSections = configuration.getJSONArray(sectionTerm);
+		JSONArray jSections = configuration.getJSONArray(JSONUtil.sectionTerm);
 		for (int i = 0; i < jSections.length(); ++i) {
 			try {
 				loadedSections.add(constructSection(jSections.getJSONObject(i)));
@@ -88,32 +67,32 @@ public final class JSONReader {
 
 	private static Section constructSection(JSONObject jSection) throws JSONException {
 		ArrayList<Segment> segments = new ArrayList<Segment>();
-		JSONArray jSegments = jSection.getJSONArray(segmentTerm);
+		JSONArray jSegments = jSection.getJSONArray(JSONUtil.segmentTerm);
 		for (int i = 0; i < jSegments.length(); ++i) {
 			segments.add(constructSegment(jSegments.getJSONObject(i)));
 		}
-		Section s = new Section(jSection.getString(nameTerm), segments);
+		Section s = new Section(jSection.getString(JSONUtil.nameTerm), segments);
 		logger.log(Level.INFO, "Loaded " + s.toString());
 		return s;
 	}
 
 	private static Segment constructSegment(JSONObject jSegment) throws JSONException {
 		ArrayList<SubPoint> subPoints = new ArrayList<SubPoint>();
-		JSONArray jSubPoints = jSegment.getJSONArray(subpointTerm);
+		JSONArray jSubPoints = jSegment.getJSONArray(JSONUtil.subpointTerm);
 		for (int i = 0; i < jSubPoints.length(); ++i) {
 			subPoints.add(constructSubPoint(jSubPoints.getJSONObject(i)));
 		}
-		return new Segment(jSegment.getString(nameTerm),
-				new SegmentContent(subPoints, jSegment.has(hintTerm) ? jSegment.getString(hintTerm) : null));
+		return new Segment(jSegment.getString(JSONUtil.nameTerm), new SegmentContent(subPoints,
+				jSegment.has(JSONUtil.hintTerm) ? jSegment.getString(JSONUtil.hintTerm) : null));
 	}
 
 	private static SubPoint constructSubPoint(JSONObject jSubPoint) throws JSONException {
 		ArrayList<SubPointEntry> subPointEntries = new ArrayList<SubPointEntry>();
-		JSONArray jSubPointEntries = jSubPoint.getJSONArray(subpointentryTerm);
+		JSONArray jSubPointEntries = jSubPoint.getJSONArray(JSONUtil.subpointentryTerm);
 		// points calculated
-		if (jSubPoint.getBoolean(pointsrankedTerm)) {
-			double maxRank = jSubPoint.getDouble(maxRankTerm);
-			double maxPoints = jSubPoint.getDouble(maxPointsTerm);
+		if (jSubPoint.getBoolean(JSONUtil.pointsrankedTerm)) {
+			double maxRank = jSubPoint.getDouble(JSONUtil.maxRankTerm);
+			double maxPoints = jSubPoint.getDouble(JSONUtil.maxPointsTerm);
 			for (int i = 0; i < jSubPointEntries.length(); ++i) {
 				subPointEntries
 						.add(constructSubPointEntryRanked(jSubPointEntries.getJSONObject(i), maxRank, maxPoints));
@@ -124,39 +103,25 @@ public final class JSONReader {
 				subPointEntries.add(constructSubPointEntry(jSubPointEntries.getJSONObject(i)));
 			}
 		}
-		return new SubPoint(jSubPoint.getString(nameTerm), subPointEntries, jSubPoint.has(bonusPointsTerm));
+		return new SubPoint(jSubPoint.getString(JSONUtil.nameTerm), subPointEntries,
+				jSubPoint.has(JSONUtil.bonusPointsTerm));
 	}
 
 	private static SubPointEntry constructSubPointEntry(JSONObject jSubPointEntry) throws JSONException {
-		if (jSubPointEntry.has(selectedTerm))
-			return new SubPointEntry(jSubPointEntry.getString(nameTerm), jSubPointEntry.getDouble(pointsTerm),
-					jSubPointEntry.getBoolean(selectedTerm));
-		return new SubPointEntry(jSubPointEntry.getString(nameTerm), jSubPointEntry.getDouble(pointsTerm));
+		if (jSubPointEntry.has(JSONUtil.selectedTerm))
+			return new SubPointEntry(jSubPointEntry.getString(JSONUtil.nameTerm),
+					jSubPointEntry.getDouble(JSONUtil.pointsTerm), jSubPointEntry.getBoolean(JSONUtil.selectedTerm));
+		return new SubPointEntry(jSubPointEntry.getString(JSONUtil.nameTerm),
+				jSubPointEntry.getDouble(JSONUtil.pointsTerm));
 	}
 
 	private static SubPointEntry constructSubPointEntryRanked(JSONObject jSubPointEntry, double maxRank,
 			double maxPoints) throws JSONException {
-		if (jSubPointEntry.has(selectedTerm))
-			return new SubPointEntry(jSubPointEntry.getString(nameTerm), jSubPointEntry.getInt(rankTerm), maxRank,
-					maxPoints, jSubPointEntry.getBoolean(selectedTerm));
-		return new SubPointEntry(jSubPointEntry.getString(nameTerm), jSubPointEntry.getInt(rankTerm), maxRank,
-				maxPoints);
+		if (jSubPointEntry.has(JSONUtil.selectedTerm))
+			return new SubPointEntry(jSubPointEntry.getString(JSONUtil.nameTerm),
+					jSubPointEntry.getInt(JSONUtil.rankTerm), maxRank, maxPoints,
+					jSubPointEntry.getBoolean(JSONUtil.selectedTerm));
+		return new SubPointEntry(jSubPointEntry.getString(JSONUtil.nameTerm), jSubPointEntry.getInt(JSONUtil.rankTerm),
+				maxRank, maxPoints);
 	}
-
-	private static void loadTerminology() throws IOException {
-		sectionTerm = PropertiesHelper.loadProperty("sections");
-		segmentTerm = PropertiesHelper.loadProperty("segments");
-		subpointTerm = PropertiesHelper.loadProperty("subpoints");
-		subpointentryTerm = PropertiesHelper.loadProperty("subpointentries");
-		hintTerm = PropertiesHelper.loadProperty("hint");
-		nameTerm = PropertiesHelper.loadProperty("name");
-		pointsTerm = PropertiesHelper.loadProperty("points");
-		rankTerm = PropertiesHelper.loadProperty("rank");
-		pointsrankedTerm = PropertiesHelper.loadProperty("pointsranked");
-		maxPointsTerm = PropertiesHelper.loadProperty("maxpoints");
-		maxRankTerm = PropertiesHelper.loadProperty("maxrank");
-		selectedTerm = PropertiesHelper.loadProperty("selected");
-		bonusPointsTerm = PropertiesHelper.loadProperty("bonuspoints");
-	}
-
 }
