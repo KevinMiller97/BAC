@@ -66,7 +66,7 @@ public final class JSONWriter {
 
 	private static JSONObject constructSubPoint(SubPoint subPoint) {
 		JSONObject jSub = new JSONObject();
-		jSub.put(JSONUtil.nameTerm, subPoint.getTopic());
+		jSub.put(JSONUtil.nameTerm, subPoint.getTitle());
 		if (subPoint.isBonusPoints()) {
 			jSub.put(JSONUtil.bonusPointsTerm, true);
 		}

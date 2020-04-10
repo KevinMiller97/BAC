@@ -2,6 +2,7 @@ package com.kevinmiller.gradingsupport.fxgui.controls;
 
 import java.util.ArrayList;
 
+import com.kevinmiller.gradingsupport.calc.CalculationParser;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 import javafx.fxml.FXML;
@@ -19,32 +20,35 @@ public class SegmentContent extends AnchorPane {
 
 	private final ArrayList<SubPoint> subPoints;
 	private String hint;
+	private String pointsFormula = "";
 
 	public SegmentContent(ArrayList<SubPoint> subPoints) {
-		this(subPoints, null);
+		this(subPoints, null, "");
 	}
 
-	public SegmentContent(ArrayList<SubPoint> subPoints, String hint) {
+	public SegmentContent(ArrayList<SubPoint> subPoints, String hint, String pointsFormula) {
 		ScreenHelper.loadFXML(this, this);
 		this.subPoints = subPoints;
 		this.hint = hint;
+		this.pointsFormula = pointsFormula;
 		if (hint != null)
 			hintLabel.setText(hint);
 		else
 			hintLabel.setVisible(false);
 		content.getChildren().addAll(subPoints);
+
 	}
 
 	public double getPoints() {
-		double points = 0;
-		for (SubPoint s : subPoints) {
-			points += s.getPoints();
-		}
-		return points;
+		return CalculationParser.calculatePoints(pointsFormula, subPoints);
 	}
 
 	public ArrayList<SubPoint> getSubPoints() {
 		return subPoints;
+	}
+
+	public String getFormula() {
+		return pointsFormula;
 	}
 
 	public String getHint() {

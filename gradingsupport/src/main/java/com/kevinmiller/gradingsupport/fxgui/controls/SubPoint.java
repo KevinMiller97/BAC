@@ -2,6 +2,7 @@ package com.kevinmiller.gradingsupport.fxgui.controls;
 
 import java.util.ArrayList;
 
+import com.kevinmiller.gradingsupport.calc.ICalculatePoints;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 import javafx.fxml.FXML;
@@ -10,7 +11,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 
-public class SubPoint extends VBox {
+public class SubPoint extends VBox implements ICalculatePoints {
 
 	@FXML
 	private Label label;
@@ -53,7 +54,7 @@ public class SubPoint extends VBox {
 		return selectedEntry;
 	}
 
-	public String getTopic() {
+	public String getTitle() {
 		return topic;
 	}
 

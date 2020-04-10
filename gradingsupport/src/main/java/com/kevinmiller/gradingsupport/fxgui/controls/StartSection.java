@@ -49,6 +49,7 @@ public class StartSection extends TabPane {
 			}
 			enterButton.setText("Change");
 		});
+		enterButton.setDefaultButton(true);
 	}
 
 	public StringProperty getStudentNameProperty() {

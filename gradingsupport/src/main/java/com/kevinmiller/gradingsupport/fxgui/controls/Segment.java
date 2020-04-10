@@ -1,11 +1,13 @@
 package com.kevinmiller.gradingsupport.fxgui.controls;
 
+import com.kevinmiller.gradingsupport.calc.ICalculatePoints;
+
 import javafx.scene.control.Tab;
 
 /**
  * @author Kevin Miller
  */
-public class Segment extends Tab {
+public class Segment extends Tab implements ICalculatePoints {
 
 	private final String title;
 	private final SegmentContent content;
@@ -27,4 +29,5 @@ public class Segment extends Tab {
 	public SegmentContent getSegmentContent() {
 		return content;
 	}
+
 }

@@ -19,6 +19,7 @@ public class JSONUtil {
 	static String maxRankTerm;
 	static String selectedTerm;
 	static String bonusPointsTerm;
+	static String formulaTerm;
 
 	public static String generateFileName(String studentName, String studentId) {
 		return studentName.trim().replaceAll("\\s+", "_") + "_" + studentId.trim();
@@ -38,6 +39,7 @@ public class JSONUtil {
 		maxRankTerm = PropertiesHelper.loadProperty("maxrank");
 		selectedTerm = PropertiesHelper.loadProperty("selected");
 		bonusPointsTerm = PropertiesHelper.loadProperty("bonuspoints");
+		formulaTerm = PropertiesHelper.loadProperty("pointsformula");
 	}
 
 }

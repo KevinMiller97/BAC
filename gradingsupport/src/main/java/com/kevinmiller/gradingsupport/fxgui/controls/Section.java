@@ -2,6 +2,8 @@ package com.kevinmiller.gradingsupport.fxgui.controls;
 
 import java.util.ArrayList;
 
+import com.kevinmiller.gradingsupport.calc.CalculationParser;
+import com.kevinmiller.gradingsupport.calc.ICalculatePoints;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 import javafx.scene.control.TabPane;
@@ -15,20 +17,17 @@ import javafx.scene.control.TabPane;
  * 
  * @author Kevin Miller
  */
-public class Section extends TabPane {
+public class Section extends TabPane implements ICalculatePoints {
 
-	protected String title;
-	protected ArrayList<Segment> segments;
+	private String title;
+	private ArrayList<Segment> segments;
+	private String pointsFormula = "";
 
-	public Section(String title) {
-		ScreenHelper.loadFXML(this, this);
-		this.title = title;
-	}
-
-	public Section(String title, ArrayList<Segment> segments) {
+	public Section(String title, ArrayList<Segment> segments, String pointsFormula) {
 		ScreenHelper.loadFXML(this, this);
 		this.title = title;
 		this.segments = segments;
+		this.pointsFormula = pointsFormula;
 		getTabs().addAll(segments);
 	}
 
@@ -50,12 +49,7 @@ public class Section extends TabPane {
 	}
 
 	public double getPoints() {
-		double points = 0;
-		for (Segment s : segments) {
-			System.out.println(s.getTitle() + " " + s.getPoints());
-			points += s.getPoints();
-		}
-		return points;
+		return CalculationParser.calculatePoints(pointsFormula, segments);
 	}
 
 	public ArrayList<Segment> getSegments() {

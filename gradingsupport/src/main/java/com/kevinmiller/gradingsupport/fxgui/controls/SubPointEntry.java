@@ -1,6 +1,8 @@
 package com.kevinmiller.gradingsupport.fxgui.controls;
 
-public class SubPointEntry {
+import com.kevinmiller.gradingsupport.calc.ICalculatePoints;
+
+public class SubPointEntry implements ICalculatePoints {
 
 	private String title;
 	private double points;

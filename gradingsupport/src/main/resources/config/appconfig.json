@@ -459,7 +459,7 @@
 						]
 					},
 					{
-					"name": "Network implementation",
+					"name": "Network Implementation",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -495,7 +495,8 @@
 						]
 					}
 				],
-				"hint": "Quality: different methods, error handling, own class, network messages are NOT returned"
+				"hint": "Quality: different methods, error handling, own class, network messages are NOT returned",
+				"calculation": "({Network Implementation}+{Network implementation quality})*{Solution copied factor}"
 			},
 			{
 				"name": "User Interface",
@@ -774,7 +775,8 @@
 						]
 					}
 				],
-				"hint": "Fields are assigned with loops and if's, no hard coded field lists; multiple methods"
+				"hint": "Fields are assigned with loops and if's, no hard coded field lists; multiple methods",
+				"calculation": "({Map generation implementation}+{Map implementation quality})*{Solution copied factor}"
 			},
 			{
 				"name": "Artificial Intelligence",
@@ -850,7 +852,8 @@
 						]
 					}
 				],
-				"hint": "Quality factors: multiple methods, implementation style, readibility, encapsulation"
+				"hint": "Quality factors: multiple methods, implementation style, readibility, encapsulation",
+				"calculation": "({Artificial intelligence}+{AI quality})*{Solution copied factor}"				
 			},
 			{
 				"name": "Implementation quality",

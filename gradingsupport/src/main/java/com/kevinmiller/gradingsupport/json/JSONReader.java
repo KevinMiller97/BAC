@@ -71,7 +71,8 @@ public final class JSONReader {
 		for (int i = 0; i < jSegments.length(); ++i) {
 			segments.add(constructSegment(jSegments.getJSONObject(i)));
 		}
-		Section s = new Section(jSection.getString(JSONUtil.nameTerm), segments);
+		Section s = new Section(jSection.getString(JSONUtil.nameTerm), segments,
+				jSection.has(JSONUtil.formulaTerm) ? jSection.getString(JSONUtil.formulaTerm) : "");
 		logger.log(Level.INFO, "Loaded " + s.toString());
 		return s;
 	}
@@ -82,8 +83,10 @@ public final class JSONReader {
 		for (int i = 0; i < jSubPoints.length(); ++i) {
 			subPoints.add(constructSubPoint(jSubPoints.getJSONObject(i)));
 		}
-		return new Segment(jSegment.getString(JSONUtil.nameTerm), new SegmentContent(subPoints,
-				jSegment.has(JSONUtil.hintTerm) ? jSegment.getString(JSONUtil.hintTerm) : null));
+		return new Segment(jSegment.getString(JSONUtil.nameTerm),
+				new SegmentContent(subPoints,
+						jSegment.has(JSONUtil.hintTerm) ? jSegment.getString(JSONUtil.hintTerm) : null,
+						jSegment.has(JSONUtil.formulaTerm) ? jSegment.getString(JSONUtil.formulaTerm) : ""));
 	}
 
 	private static SubPoint constructSubPoint(JSONObject jSubPoint) throws JSONException {

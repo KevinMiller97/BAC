@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.json.JSONException;
 
+import com.kevinmiller.gradingsupport.calc.CalculationParser;
+import com.kevinmiller.gradingsupport.calc.ICalculatePoints;
 import com.kevinmiller.gradingsupport.fxgui.controls.Footer;
 import com.kevinmiller.gradingsupport.fxgui.controls.Section;
 import com.kevinmiller.gradingsupport.fxgui.controls.StartSection;
@@ -16,7 +18,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
 
-public class FXBaseApplication extends StackPane {
+public class FXBaseApplication extends StackPane implements ICalculatePoints {
 
 	@FXML
 	private StackPane footerWrapper;
@@ -27,6 +29,7 @@ public class FXBaseApplication extends StackPane {
 	private Footer footer;
 	private ArrayList<Section> sections;
 	private StartSection startSection;
+	private String pointsFormula = ""; // TODO
 
 	public FXBaseApplication() {
 		ScreenHelper.loadFXML(this, this);
@@ -45,12 +48,7 @@ public class FXBaseApplication extends StackPane {
 
 			footer = new Footer(startSection.getStudentNameProperty(), startSection.getStudentIdProperty());
 			footer.setOnFinishButtonPressed(() -> {
-				double points = 0;
-				for (Section s : sections) {
-					System.out.println(s.getTitle() + " " + s.getPoints());
-					points += s.getPoints();
-				}
-				System.out.println(points);
+				System.out.println(CalculationParser.calculatePoints(pointsFormula, sections));
 				JSONWriter.generateSaveFile(sections, startSection.getStudentName(), startSection.getStudentId());
 			});
 
@@ -59,5 +57,16 @@ public class FXBaseApplication extends StackPane {
 		} catch (JSONException e) {
 
 		}
+	}
+
+	// TODO
+	@Override
+	public String getTitle() {
+		return null;
+	}
+
+	@Override
+	public double getPoints() {
+		return 0;
 	}
 }
