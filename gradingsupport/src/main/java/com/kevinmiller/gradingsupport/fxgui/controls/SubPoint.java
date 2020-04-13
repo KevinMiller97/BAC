@@ -1,6 +1,7 @@
 package com.kevinmiller.gradingsupport.fxgui.controls;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kevinmiller.gradingsupport.calc.ICalculatePoints;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
@@ -22,12 +23,14 @@ public class SubPoint extends VBox implements ICalculatePoints {
 	private final String topic;
 	private final ArrayList<SubPointEntry> entries;
 	private final boolean bonusPoints;
+	private final String identifier;
 
-	public SubPoint(String topic, ArrayList<SubPointEntry> entries, boolean bonusPoints) {
+	public SubPoint(String topic, ArrayList<SubPointEntry> entries, boolean bonusPoints, String identifier) {
 		ScreenHelper.loadFXML(this, this);
 		this.bonusPoints = bonusPoints;
 		this.entries = entries;
 		this.topic = topic;
+		this.identifier = identifier;
 		label.setText(topic);
 
 		for (SubPointEntry entry : entries) {
@@ -64,6 +67,21 @@ public class SubPoint extends VBox implements ICalculatePoints {
 
 	public ArrayList<SubPointEntry> getEntries() {
 		return entries;
+	}
+
+	@Override
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	@Override
+	public String getFormula() {
+		return "";
+	}
+
+	@Override
+	public List<? extends ICalculatePoints> getSubNodes() {
+		return null;
 	}
 
 }

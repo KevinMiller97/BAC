@@ -2,12 +2,16 @@
 "sections" : [
 	{
 		"name": "Part One",
+		"supersection": true,
+		"identifier": "P1",
 		"segments": [
 			{
-				"name": "Preparation",
+				"name": "Step 1: Preparation",
+				"identifier": "Step1",
 				"subpoints": [
 					{
 						"name": "Preparation result",
+						"identifier": "PrepRes",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -31,10 +35,12 @@
 				]
 			},
 			{
-				"name": "Automatic Evaluation",
+				"name": "Step 2: Automatic Evaluation",
+				"identifier": "Step2",
 				"subpoints": [
 					{
 						"name": "Automatic evaluation", 
+						"identifier": "AutoEval",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -54,10 +60,12 @@
 				]
 			},
 			{
-				"name": "Implementation Progress",
+				"name": "Step 3: Implementation Progress",
+				"identifier": "Step3",
 				"subpoints": [
 					{
 						"name": "Progress",
+						"identifier": "Prog",
 						"bonus": "true",
 						"points_ranked": "false",
 						"subpointentries": [
@@ -82,19 +90,38 @@
 							"points": 1
 							}
 						]
+					},
+					{
+						"name": "Deadline",
+						"identifier": "Dead",
+						"points_ranked": "false",
+						"subpointentries": [
+							{
+							"name": "Submitted on time",
+							"points": 1
+							},
+							{
+							"name": "Submitted <12 hours later",
+							"points": 0.9							
+							}
+						]
 					}
 				]
-			} 
-		] 
+			}
+		],
+		"calculation": "(((({P3}*{Step1})*(1+{GenImplQual}))*{Step2})+{P2})*{Dead}"
 	},
 	{
 		"name" : "Part Two",
+		"identifier": "P2",
 		"segments": [
 			{
 				"name": "Logging",
+				"identifier": "Log",
 				"subpoints": [
 					{
 						"name": "Log implementation",
+						"identifier": "LogImp",
 						"points_ranked": "true",
 						"max_points": 1,
 						"max_rank": 6,
@@ -139,6 +166,7 @@
 					},
 					{
 						"name": "Logging quality",
+						"identifier": "LogQual",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -160,13 +188,16 @@
 						]
 					}
 				],
-				"hint": "Useful and informative; Multiple appropriate log levels"
+				"hint": "Useful and informative; Multiple appropriate log levels",
+				"calculation": "{LogImp}*{LogQual}"
 			},
 			{
 				"name": "Unit Testing",
+				"identifier": "UT",
 				"subpoints": [
 					{
 						"name": "Testing implementation",
+						"identifier": "TestImp",
 						"points_ranked": "true",
 						"max_points": 5,
 						"max_rank": 10,
@@ -223,6 +254,7 @@
 					},
 					{
 						"name": "Unit testing quality",
+						"identifier": "TestQual",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -245,6 +277,7 @@
 					},
 					{
 						"name": "Coverage",
+						"identifier": "TestCov",
 						"points_ranked": "true",
 						"max_points": 1,
 						"max_rank": 12,
@@ -304,13 +337,16 @@
 						]
 					}
 				],
-				"hint": "Tests only count if they test logic, no Getters/Setters! If not isolated from external dependencies then lower the quality! (e.g testing network with our server = bad!). Take a look at the naming scheme!"
+				"hint": "Tests only count if they test logic, no Getters/Setters! If not isolated from external dependencies then lower the quality! (e.g testing network with our server = bad!). Take a look at the naming scheme!",
+				"calculation": "{TestImp}*{TestQual}*{TestCov}"
 			},
 			{
 				"name": "Error Handling",
+				"identifier": "EH",
 				"subpoints": [
 					{
 						"name": "Error Handling - Exceptions",
+						"identifier": "Exceptions",
 						"points_ranked": "true",
 						"max_points": 2.5,
 						"max_rank": 4,
@@ -351,6 +387,7 @@
 					},
 					{
 						"name": "Try Catch multiple exceptions",
+						"identifier": "TryCatchExc",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -369,6 +406,7 @@
 					},
 					{
 						"name": "Error handling quality",
+						"identifier": "EHQual",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -390,13 +428,16 @@
 						]
 					}
 				],
-				"hint": "Count only if cought, processed and logged/ printed to user"
+				"hint": "Count only if cought, processed and logged/ printed to user",
+				"calculation": "({Exceptions}+{TryCatchExc})*{EHQual}"
 			} ,
 			{
 				"name": "Documentation of time",
+				"identifier": "DocOT",
 				"subpoints": [
 					{
 						"name": "Invested hours, estimation vs. reality",
+						"identifier": "InvH",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -428,12 +469,15 @@
 	},
 	{
 		"name": "Part Three",
+		"identifier": "P3",
 		"segments": [
 			{
 				"name": "Network communication",
+				"identifier": "NC",
 				"subpoints": [
 					{
 						"name": "Solution copied factor",
+						"identifier": "SCF",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -459,7 +503,8 @@
 						]
 					},
 					{
-					"name": "Network Implementation",
+						"name": "Network Implementation",
+						"identifier": "NetImpl",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -474,6 +519,7 @@
 					},
 					{
 						"name": "Network implementation quality",
+						"identifier": "NetImpQual",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -496,13 +542,15 @@
 					}
 				],
 				"hint": "Quality: different methods, error handling, own class, network messages are NOT returned",
-				"calculation": "({Network Implementation}+{Network implementation quality})*{Solution copied factor}"
+				"calculation": "({NetImpl}*{NetImpQual})*{SCF}"
 			},
 			{
 				"name": "User Interface",
+				"identifier": "UI",
 				"subpoints": [
 					{
 						"name": "All map tiles & terrains",
+						"identifier": "MapComplete",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -525,6 +573,7 @@
 					},
 					{
 						"name": "Both players visible",
+						"identifier": "2Players",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -547,6 +596,7 @@
 					},
 					{
 						"name": "Own fort & treasure",
+						"identifier": "FortAndTreas",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -569,6 +619,7 @@
 					},
 					{
 						"name": "Enemy fort and treasure",
+						"identifier": "EnemyFortAndTrea",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -591,6 +642,7 @@
 					},
 					{
 						"name": "Won/Lost game reported",
+						"identifier": "WonLost",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -613,6 +665,7 @@
 					},
 					{
 						"name": "CLI UI Implementation quality",
+						"identifier": "CLIUIQual",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -635,6 +688,7 @@
 					},
 					{
 						"name": "Advanced 2D Interface",
+						"identifier": "AdvUI",
 						"bonus": "true",
 						"points_ranked": "false",
 						"subpointentries": [
@@ -657,13 +711,16 @@
 						]
 					}
 				],
-				"hint": "Basic 2D = only colors, Fancy 2D = icons/images"
+				"hint": "Basic 2D = only colors, Fancy 2D = icons/images",
+				"calculation": "({MapComplete}+{2Players}+{FortAndTreas}+{EnemyFortAndTrea}+{WonLost})*{CLIUIQual}"
 			},
 			{
 				"name": "Model View Controller",
+				"identifier": "MVC",
 				"subpoints": [
 					{
 						"name": "MVC implemented",
+						"identifier": "MVCImpl",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -682,6 +739,7 @@
 					},
 					{
 						"name": "MVC implementation quality",
+						"identifier": "MVCImpQual",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -703,13 +761,16 @@
 						]
 					}
 				],
-				"hint": "MVC must use the Java Observable & Observer pattern and USE IT. No public methods in view!"
+				"hint": "MVC must use the Java Observable & Observer pattern and USE IT. No public methods in view!",
+				"calculation": "{MVCImpl}*{MVCImpQual}"
 			},
 			{
 				"name": "Map Generation",
+				"identifier": "MG",
 				"subpoints": [
 					{
 						"name": "Solution copied factor",
+						"identifier": "SCF",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -736,6 +797,7 @@
 					},
 					{
 					"name": "Map generation implementation",
+					"identifier": "MGImpl",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -754,6 +816,7 @@
 					},
 					{
 						"name": "Map implementation quality",
+						"identifier": "MGImpQual",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -776,13 +839,15 @@
 					}
 				],
 				"hint": "Fields are assigned with loops and if's, no hard coded field lists; multiple methods",
-				"calculation": "({Map generation implementation}+{Map implementation quality})*{Solution copied factor}"
+				"calculation": "{MGImpl}*{MGImpQual}*{SCF}"
 			},
 			{
 				"name": "Artificial Intelligence",
+				"identifier": "AI",
 				"subpoints": [
 					{
 						"name": "Solution copied factor",
+						"identifier": "SCF",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -808,7 +873,8 @@
 						]
 					},
 					{
-					"name": "Artificial intelligence",
+						"name": "Artificial intelligence",
+						"identifier": "AIStyle",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -831,6 +897,7 @@
 					},
 					{
 						"name": "AI quality",
+						"identifier": "AIQual",
 						"points_ranked": "false",
 						"subpointentries": [
 							{
@@ -853,10 +920,11 @@
 					}
 				],
 				"hint": "Quality factors: multiple methods, implementation style, readibility, encapsulation",
-				"calculation": "({Artificial intelligence}+{AI quality})*{Solution copied factor}"				
+				"calculation": "{AIStyle}*{AIQual}*{SCF}"				
 			},
 			{
 				"name": "Implementation quality",
+				"identifier": "GenImplQual",
 				"subpoints": [
 					{
 						"name": "Clear architecture; >5 packages; >10 classes",
@@ -953,6 +1021,7 @@
 			},
 			{
 				"name": "GIT",
+				"identifier": "GIT",
 				"subpoints": [
 					{
 						"name": ">10 reasonable GIT commits",

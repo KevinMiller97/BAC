@@ -42,10 +42,12 @@ public final class JSONWriter {
 		JSONObject jSection = new JSONObject();
 		jSection.put(JSONUtil.nameTerm, section.getTitle());
 		JSONArray jSegments = new JSONArray();
-		for (Segment s : section.getSegments()) {
+		for (Segment s : section.getSubNodes()) {
 			jSegments.put(constructSegment(s));
 		}
 		jSection.put(JSONUtil.segmentTerm, jSegments);
+		jSection.put(JSONUtil.formulaTerm, section.getFormula());
+		jSection.put(JSONUtil.identifierTerm, section.getIdentifier());
 		return jSection;
 
 	}
@@ -59,6 +61,8 @@ public final class JSONWriter {
 			jSubPoints.put(constructSubPoint(sp));
 		}
 		jSegment.put(JSONUtil.subpointTerm, jSubPoints);
+		jSegment.put(JSONUtil.formulaTerm, segment.getFormula());
+		jSegment.put(JSONUtil.identifierTerm, segment.getIdentifier());
 		if (segment.getSegmentContent().getHint() != null)
 			jSegment.put(JSONUtil.hintTerm, segment.getSegmentContent().getHint());
 		return jSegment;
@@ -77,6 +81,8 @@ public final class JSONWriter {
 			jSub.put(JSONUtil.maxRankTerm, subPoint.getEntries().get(0).getMaxRank());
 			jSub.put(JSONUtil.maxPointsTerm, subPoint.getEntries().get(0).getMaxPoints());
 		}
+		jSub.put(JSONUtil.formulaTerm, subPoint.getFormula());
+		jSub.put(JSONUtil.identifierTerm, subPoint.getIdentifier());
 
 		JSONArray jSubPointEntries = new JSONArray();
 		for (SubPointEntry spe : subPoint.getEntries()) {

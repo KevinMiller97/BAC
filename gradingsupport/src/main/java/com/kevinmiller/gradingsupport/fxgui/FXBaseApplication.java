@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import org.json.JSONException;
 
 import com.kevinmiller.gradingsupport.calc.CalculationParser;
-import com.kevinmiller.gradingsupport.calc.ICalculatePoints;
 import com.kevinmiller.gradingsupport.fxgui.controls.Footer;
 import com.kevinmiller.gradingsupport.fxgui.controls.Section;
 import com.kevinmiller.gradingsupport.fxgui.controls.StartSection;
+import com.kevinmiller.gradingsupport.fxgui.controls.SuperSection;
 import com.kevinmiller.gradingsupport.json.JSONReader;
 import com.kevinmiller.gradingsupport.json.JSONWriter;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
@@ -18,7 +18,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
 
-public class FXBaseApplication extends StackPane implements ICalculatePoints {
+public class FXBaseApplication extends StackPane {
 
 	@FXML
 	private StackPane footerWrapper;
@@ -29,7 +29,6 @@ public class FXBaseApplication extends StackPane implements ICalculatePoints {
 	private Footer footer;
 	private ArrayList<Section> sections;
 	private StartSection startSection;
-	private String pointsFormula = ""; // TODO
 
 	public FXBaseApplication() {
 		ScreenHelper.loadFXML(this, this);
@@ -48,25 +47,20 @@ public class FXBaseApplication extends StackPane implements ICalculatePoints {
 
 			footer = new Footer(startSection.getStudentNameProperty(), startSection.getStudentIdProperty());
 			footer.setOnFinishButtonPressed(() -> {
-				System.out.println(CalculationParser.calculatePoints(pointsFormula, sections));
-				JSONWriter.generateSaveFile(sections, startSection.getStudentName(), startSection.getStudentId());
+				for (Section s : sections) {
+					if (s instanceof SuperSection) {
+						System.out.println(CalculationParser.calculatePointsGlobalIdentifier(s.getFormula(),
+								s.getSubNodes(), ((SuperSection) s).getSections()));
+						JSONWriter.generateSaveFile(sections, startSection.getStudentName(),
+								startSection.getStudentId());
+					}
+				}
 			});
 
-			footerWrapper.getChildren().add(footer);// TODO
+			footerWrapper.getChildren().add(footer);
 
 		} catch (JSONException e) {
 
 		}
-	}
-
-	// TODO
-	@Override
-	public String getTitle() {
-		return null;
-	}
-
-	@Override
-	public double getPoints() {
-		return 0;
 	}
 }

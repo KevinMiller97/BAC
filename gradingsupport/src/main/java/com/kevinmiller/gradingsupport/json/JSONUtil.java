@@ -20,6 +20,8 @@ public class JSONUtil {
 	static String selectedTerm;
 	static String bonusPointsTerm;
 	static String formulaTerm;
+	static String superSectionTerm;
+	static String identifierTerm;
 
 	public static String generateFileName(String studentName, String studentId) {
 		return studentName.trim().replaceAll("\\s+", "_") + "_" + studentId.trim();
@@ -40,6 +42,8 @@ public class JSONUtil {
 		selectedTerm = PropertiesHelper.loadProperty("selected");
 		bonusPointsTerm = PropertiesHelper.loadProperty("bonuspoints");
 		formulaTerm = PropertiesHelper.loadProperty("pointsformula");
+		superSectionTerm = PropertiesHelper.loadProperty("supersection");
+		identifierTerm = PropertiesHelper.loadProperty("identifier");
 	}
 
 }

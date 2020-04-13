@@ -17,6 +17,7 @@ import com.kevinmiller.gradingsupport.fxgui.controls.Segment;
 import com.kevinmiller.gradingsupport.fxgui.controls.SegmentContent;
 import com.kevinmiller.gradingsupport.fxgui.controls.SubPoint;
 import com.kevinmiller.gradingsupport.fxgui.controls.SubPointEntry;
+import com.kevinmiller.gradingsupport.fxgui.controls.SuperSection;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 public final class JSONReader {
@@ -36,10 +37,13 @@ public final class JSONReader {
 			return;
 		} catch (FileNotFoundException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
+			e.printStackTrace();
 		} catch (IOException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
+			e.printStackTrace();
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.getClass().getSimpleName(), e);
+			e.printStackTrace();
 		}
 		logger.log(Level.SEVERE, "Could not load configuration, stopping Application");
 		System.exit(1);
@@ -54,6 +58,10 @@ public final class JSONReader {
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
+		}
+		for (Section s : loadedSections) {
+			if (s instanceof SuperSection)
+				((SuperSection) s).setSections(loadedSections);
 		}
 		sections = Optional.of(loadedSections);
 	}
@@ -71,8 +79,16 @@ public final class JSONReader {
 		for (int i = 0; i < jSegments.length(); ++i) {
 			segments.add(constructSegment(jSegments.getJSONObject(i)));
 		}
-		Section s = new Section(jSection.getString(JSONUtil.nameTerm), segments,
-				jSection.has(JSONUtil.formulaTerm) ? jSection.getString(JSONUtil.formulaTerm) : "");
+		String name = jSection.getString(JSONUtil.nameTerm);
+		String formula = jSection.has(JSONUtil.formulaTerm) ? jSection.getString(JSONUtil.formulaTerm) : "";
+		String identifier = jSection.has(JSONUtil.identifierTerm) ? jSection.getString(JSONUtil.identifierTerm) : "";
+
+		Section s;
+		if (jSection.has(JSONUtil.superSectionTerm)) {
+			s = new SuperSection(name, segments, formula, identifier);
+		} else {
+			s = new Section(name, segments, formula, identifier);
+		}
 		logger.log(Level.INFO, "Loaded " + s.toString());
 		return s;
 	}
@@ -83,15 +99,18 @@ public final class JSONReader {
 		for (int i = 0; i < jSubPoints.length(); ++i) {
 			subPoints.add(constructSubPoint(jSubPoints.getJSONObject(i)));
 		}
-		return new Segment(jSegment.getString(JSONUtil.nameTerm),
-				new SegmentContent(subPoints,
-						jSegment.has(JSONUtil.hintTerm) ? jSegment.getString(JSONUtil.hintTerm) : null,
-						jSegment.has(JSONUtil.formulaTerm) ? jSegment.getString(JSONUtil.formulaTerm) : ""));
+		String name = jSegment.getString(JSONUtil.nameTerm);
+		String hint = jSegment.has(JSONUtil.hintTerm) ? jSegment.getString(JSONUtil.hintTerm) : null;
+		String formula = jSegment.has(JSONUtil.formulaTerm) ? jSegment.getString(JSONUtil.formulaTerm) : "";
+		String identifier = jSegment.has(JSONUtil.identifierTerm) ? jSegment.getString(JSONUtil.identifierTerm) : "";
+
+		return new Segment(name, new SegmentContent(subPoints, hint, formula), identifier);
 	}
 
 	private static SubPoint constructSubPoint(JSONObject jSubPoint) throws JSONException {
 		ArrayList<SubPointEntry> subPointEntries = new ArrayList<SubPointEntry>();
 		JSONArray jSubPointEntries = jSubPoint.getJSONArray(JSONUtil.subpointentryTerm);
+		String identifier = jSubPoint.has(JSONUtil.identifierTerm) ? jSubPoint.getString(JSONUtil.identifierTerm) : "";
 		// points calculated
 		if (jSubPoint.getBoolean(JSONUtil.pointsrankedTerm)) {
 			double maxRank = jSubPoint.getDouble(JSONUtil.maxRankTerm);
@@ -107,24 +126,23 @@ public final class JSONReader {
 			}
 		}
 		return new SubPoint(jSubPoint.getString(JSONUtil.nameTerm), subPointEntries,
-				jSubPoint.has(JSONUtil.bonusPointsTerm));
+				jSubPoint.has(JSONUtil.bonusPointsTerm), identifier);
 	}
 
 	private static SubPointEntry constructSubPointEntry(JSONObject jSubPointEntry) throws JSONException {
+		String name = jSubPointEntry.getString(JSONUtil.nameTerm);
+		double points = jSubPointEntry.getDouble(JSONUtil.pointsTerm);
 		if (jSubPointEntry.has(JSONUtil.selectedTerm))
-			return new SubPointEntry(jSubPointEntry.getString(JSONUtil.nameTerm),
-					jSubPointEntry.getDouble(JSONUtil.pointsTerm), jSubPointEntry.getBoolean(JSONUtil.selectedTerm));
-		return new SubPointEntry(jSubPointEntry.getString(JSONUtil.nameTerm),
-				jSubPointEntry.getDouble(JSONUtil.pointsTerm));
+			return new SubPointEntry(name, points, jSubPointEntry.getBoolean(JSONUtil.selectedTerm));
+		return new SubPointEntry(name, points);
 	}
 
 	private static SubPointEntry constructSubPointEntryRanked(JSONObject jSubPointEntry, double maxRank,
 			double maxPoints) throws JSONException {
+		String name = jSubPointEntry.getString(JSONUtil.nameTerm);
+		int rank = jSubPointEntry.getInt(JSONUtil.rankTerm);
 		if (jSubPointEntry.has(JSONUtil.selectedTerm))
-			return new SubPointEntry(jSubPointEntry.getString(JSONUtil.nameTerm),
-					jSubPointEntry.getInt(JSONUtil.rankTerm), maxRank, maxPoints,
-					jSubPointEntry.getBoolean(JSONUtil.selectedTerm));
-		return new SubPointEntry(jSubPointEntry.getString(JSONUtil.nameTerm), jSubPointEntry.getInt(JSONUtil.rankTerm),
-				maxRank, maxPoints);
+			return new SubPointEntry(name, rank, maxRank, maxPoints, jSubPointEntry.getBoolean(JSONUtil.selectedTerm));
+		return new SubPointEntry(name, rank, maxRank, maxPoints);
 	}
 }

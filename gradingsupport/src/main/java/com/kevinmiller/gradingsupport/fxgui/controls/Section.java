@@ -19,15 +19,20 @@ import javafx.scene.control.TabPane;
  */
 public class Section extends TabPane implements ICalculatePoints {
 
-	private String title;
-	private ArrayList<Segment> segments;
-	private String pointsFormula = "";
+	protected String title;
+	protected ArrayList<Segment> segments;
+	protected String pointsFormula = "";
+	protected String identifier;
 
-	public Section(String title, ArrayList<Segment> segments, String pointsFormula) {
+	public Section() {
+	}
+
+	public Section(String title, ArrayList<Segment> segments, String pointsFormula, String identifier) {
 		ScreenHelper.loadFXML(this, this);
 		this.title = title;
 		this.segments = segments;
 		this.pointsFormula = pointsFormula;
+		this.identifier = identifier;
 		getTabs().addAll(segments);
 	}
 
@@ -52,8 +57,18 @@ public class Section extends TabPane implements ICalculatePoints {
 		return CalculationParser.calculatePoints(pointsFormula, segments);
 	}
 
-	public ArrayList<Segment> getSegments() {
+	public ArrayList<Segment> getSubNodes() {
 		return segments;
+	}
+
+	@Override
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	@Override
+	public String getFormula() {
+		return pointsFormula;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.kevinmiller.gradingsupport.fxgui.controls;
 
+import java.util.List;
+
 import com.kevinmiller.gradingsupport.calc.ICalculatePoints;
 
 public class SubPointEntry implements ICalculatePoints {
@@ -70,6 +72,21 @@ public class SubPointEntry implements ICalculatePoints {
 
 	public boolean isSelectedBeforeSession() {
 		return selectedBeforeSession;
+	}
+
+	@Override
+	public String getIdentifier() {
+		return "";
+	}
+
+	@Override
+	public String getFormula() {
+		return "";
+	}
+
+	@Override
+	public List<? extends ICalculatePoints> getSubNodes() {
+		return null;
 	}
 
 }
