@@ -1,9 +1,11 @@
 package com.kevinmiller.gradingsupport.fxgui.controls;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.kevinmiller.gradingsupport.calc.ICalculatePoints;
+import com.kevinmiller.gradingsupport.utility.PropertiesHelper;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 import javafx.fxml.FXML;
@@ -25,6 +27,9 @@ public class SubPoint extends VBox implements ICalculatePoints {
 	private final boolean bonusPoints;
 	private final String identifier;
 
+	private String entryWorkedOn;
+	private String entryNotWorkedOn;
+
 	public SubPoint(String topic, ArrayList<SubPointEntry> entries, boolean bonusPoints, String identifier) {
 		ScreenHelper.loadFXML(this, this);
 		this.bonusPoints = bonusPoints;
@@ -32,20 +37,31 @@ public class SubPoint extends VBox implements ICalculatePoints {
 		this.topic = topic;
 		this.identifier = identifier;
 		label.setText(topic);
+		try {
+			entryWorkedOn = PropertiesHelper.loadProperty("colorEntryWorkedOn");
+			entryNotWorkedOn = PropertiesHelper.loadProperty("colorEntryNotWorkedOn");
+		} catch (IOException e) {
+			// if not configured
+			entryWorkedOn = "WHITE";
+			entryNotWorkedOn = "GREY";
+		}
 
 		for (SubPointEntry entry : entries) {
 			MenuItem option = new MenuItem(entry.getTitle());
 			option.setOnAction(v -> {
 				selectedEntry = entry;
 				dropdownMenu.setText(entry.getTitle());
+				dropdownMenu.setStyle("-fx-background-color: " + entryWorkedOn + ";");
 			});
 			if (entry.wasSelectedBeforeSession()) {
 				selectedEntry = entry;
 			}
 			dropdownMenu.getItems().add(option);
 		}
-		if (selectedEntry == null)
+		if (selectedEntry == null) {
 			selectedEntry = entries.get(0);
+			dropdownMenu.setStyle("-fx-background-color: " + entryNotWorkedOn + ";");
+		}
 		dropdownMenu.setText(selectedEntry.getTitle());
 	}
 

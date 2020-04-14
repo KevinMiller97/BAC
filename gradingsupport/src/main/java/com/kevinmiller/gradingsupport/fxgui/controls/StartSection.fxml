@@ -43,8 +43,8 @@
                                     <Insets top="5.0" />
                                  </padding>
                               </HBox>
-                              <Button fx:id="enterButton" mnemonicParsing="false" text="Enter" />
-                              <Label style="-fx-font-weight: bold;" text="Current entry:">
+                              <Button fx:id="enterButton" mnemonicParsing="false" text="Create new" />
+                              <Label style="-fx-font-weight: bold;" text="Current entry">
                               	<padding>
                                     <Insets top="20.0" />
                                  </padding>
@@ -68,6 +68,15 @@
                                     <Insets top="5.0" />
                                  </padding>
                               </HBox>
+                              <VBox spacing="5.0">
+                              	<children>
+                              		<Label style="-fx-font-weight: bold;" text="Continue from existing file"/>
+                              		<Button fx:id="fileChooserButton" mnemonicParsing="false" text="Search"/>
+                              	</children>
+                              	<padding>
+                                   <Insets top="20.0" />
+                                </padding>
+                              </VBox>
                            </children>
                            <padding>
                               <Insets left="10.0" top="20.0" />

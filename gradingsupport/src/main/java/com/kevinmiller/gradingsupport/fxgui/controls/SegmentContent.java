@@ -1,13 +1,17 @@
 package com.kevinmiller.gradingsupport.fxgui.controls;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.kevinmiller.gradingsupport.calc.CalculationParser;
+import com.kevinmiller.gradingsupport.utility.PropertiesHelper;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 public class SegmentContent extends AnchorPane {
@@ -17,6 +21,12 @@ public class SegmentContent extends AnchorPane {
 
 	@FXML
 	private Label hintLabel;
+
+	@FXML
+	private BorderPane borderPane;
+
+	@FXML
+	private VBox hintBox;
 
 	private final ArrayList<SubPoint> subPoints;
 	private String hint;
@@ -34,9 +44,16 @@ public class SegmentContent extends AnchorPane {
 		if (hint != null)
 			hintLabel.setText(hint);
 		else
-			hintLabel.setVisible(false);
+			hintBox.setVisible(false);
 		content.getChildren().addAll(subPoints);
-
+		try {
+			borderPane.setPrefWidth(Integer.parseInt(PropertiesHelper.loadProperty("fx.x")) - 40);
+			BorderPane.setMargin(content, new Insets(0, 0, 30, 0));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public double getPoints() {
