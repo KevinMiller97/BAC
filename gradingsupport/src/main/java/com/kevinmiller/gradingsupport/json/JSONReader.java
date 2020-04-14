@@ -1,5 +1,6 @@
 package com.kevinmiller.gradingsupport.json;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,22 +20,33 @@ import com.kevinmiller.gradingsupport.fxgui.controls.SegmentContent;
 import com.kevinmiller.gradingsupport.fxgui.controls.SubPoint;
 import com.kevinmiller.gradingsupport.fxgui.controls.SubPointEntry;
 import com.kevinmiller.gradingsupport.fxgui.controls.SuperSection;
+import com.kevinmiller.gradingsupport.stagecontroller.UserScreen;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
+
+import javafx.stage.FileChooser;
 
 public final class JSONReader {
 
 	private static Optional<ArrayList<Section>> sections;
 	private static ArrayList<Section> loadedSections = new ArrayList<Section>();
 
-	static final String configLocation = "/config/appconfig.json";
-	final static Logger logger = Logger.getLogger(ScreenHelper.class.getName());
+	private static final String configLocation = "/config/appconfig.json";
+	private final static Logger logger = Logger.getLogger(ScreenHelper.class.getName());
 
-	public static void loadConfigurationAndInitializeApplication() throws JSONException {
+	private static final FileChooser fileChooser = new FileChooser();
+
+	public static void loadConfigurationAndInitializeApplication(String configuration) throws JSONException {
 		ScreenHelper.configureLogger(logger);
 		try {
 			JSONUtil.loadTerminology();
-			String configRead = IOUtils.toString(JSONReader.class.getResourceAsStream(configLocation), "UTF-8");
-			initializeGUIContent(new JSONObject(configRead));
+			if (configuration == null) {
+				// blank application from appconfig.json
+				String configRead = IOUtils.toString(JSONReader.class.getResourceAsStream(configLocation), "UTF-8");
+				initializeGUIContent(new JSONObject(configRead));
+			} else {
+				// configuration from file
+				initializeGUIContent(new JSONObject(configuration));
+			}
 			return;
 		} catch (FileNotFoundException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -47,6 +60,23 @@ public final class JSONReader {
 		}
 		logger.log(Level.SEVERE, "Could not load configuration, stopping Application");
 		System.exit(1);
+	}
+
+	public static void initializeGUIContentFromFile() {
+		File file = fileChooser.showOpenDialog(UserScreen.getStage());
+		loadedSections = new ArrayList<Section>();
+		if (file != null) {
+			try {
+				String configuration = FileUtils.readFileToString(file, "UTF-8");
+				loadConfigurationAndInitializeApplication(configuration);
+				UserScreen.reload(new JSONObject(configuration));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+		}
 	}
 
 	static void initializeGUIContent(JSONObject configuration) {

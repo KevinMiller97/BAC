@@ -30,11 +30,14 @@ public class FXBaseApplication extends StackPane {
 	private ArrayList<Section> sections;
 	private StartSection startSection;
 
-	public FXBaseApplication() {
+	public FXBaseApplication(boolean fromFile) {
 		ScreenHelper.loadFXML(this, this);
 		try {
-			JSONReader.loadConfigurationAndInitializeApplication();
+			if (!fromFile)
+				JSONReader.loadConfigurationAndInitializeApplication(null);
+
 			startSection = new StartSection();
+			sectionPane.getTabs().clear();
 			sectionPane.getTabs().add(new Tab("Start", startSection));
 
 			while (!JSONReader.getSections().isPresent()) {
@@ -56,11 +59,14 @@ public class FXBaseApplication extends StackPane {
 					}
 				}
 			});
-
 			footerWrapper.getChildren().add(footer);
-
 		} catch (JSONException e) {
-
+			// TODO
 		}
 	}
+
+	public StartSection getStartSection() {
+		return startSection;
+	}
+
 }

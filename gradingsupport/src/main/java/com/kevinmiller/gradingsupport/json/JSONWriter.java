@@ -21,6 +21,9 @@ public final class JSONWriter {
 
 	public static void generateSaveFile(ArrayList<Section> sections, String studentName, String studentId) {
 		JSONObject result = new JSONObject();
+		result.put(JSONUtil.studentnameTerm, studentName);
+		result.put(JSONUtil.studentidTerm, studentId);
+
 		JSONArray jSections = new JSONArray();
 		for (Section s : sections) {
 			jSections.put(constructSection(s));

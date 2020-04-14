@@ -22,6 +22,8 @@ public class JSONUtil {
 	static String formulaTerm;
 	static String superSectionTerm;
 	static String identifierTerm;
+	public static String studentnameTerm;
+	public static String studentidTerm;
 
 	public static String generateFileName(String studentName, String studentId) {
 		return studentName.trim().replaceAll("\\s+", "_") + "_" + studentId.trim();
@@ -44,6 +46,8 @@ public class JSONUtil {
 		formulaTerm = PropertiesHelper.loadProperty("pointsformula");
 		superSectionTerm = PropertiesHelper.loadProperty("supersection");
 		identifierTerm = PropertiesHelper.loadProperty("identifier");
+		studentnameTerm = PropertiesHelper.loadProperty("studentname");
+		studentidTerm = PropertiesHelper.loadProperty("studentid");
 	}
 
 }

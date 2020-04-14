@@ -1,5 +1,8 @@
 package com.kevinmiller.gradingsupport.fxgui.controls;
 
+import java.util.logging.Logger;
+
+import com.kevinmiller.gradingsupport.json.JSONReader;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -27,11 +30,17 @@ public class StartSection extends TabPane {
 	@FXML
 	private Button enterButton;
 
+	@FXML
+	private Button fileChooserButton;
+
 	private StringProperty studentName = new SimpleStringProperty();
 	private StringProperty studentId = new SimpleStringProperty();
 
+	final static Logger logger = Logger.getLogger(StartSection.class.getName());
+
 	public StartSection() {
 		ScreenHelper.loadFXML(this, this);
+
 		enterButton.setOnAction(value -> {
 			studentName.set(nameField.getText());
 			nameLabel.setText(nameField.getText());
@@ -50,6 +59,10 @@ public class StartSection extends TabPane {
 			enterButton.setText("Change");
 		});
 		enterButton.setDefaultButton(true);
+
+		fileChooserButton.setOnAction(value -> {
+			JSONReader.initializeGUIContentFromFile();
+		});
 	}
 
 	public StringProperty getStudentNameProperty() {
