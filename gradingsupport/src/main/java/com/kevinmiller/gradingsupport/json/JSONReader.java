@@ -133,8 +133,9 @@ public final class JSONReader {
 		String hint = jSegment.has(JSONUtil.hintTerm) ? jSegment.getString(JSONUtil.hintTerm) : null;
 		String formula = jSegment.has(JSONUtil.formulaTerm) ? jSegment.getString(JSONUtil.formulaTerm) : "";
 		String identifier = jSegment.has(JSONUtil.identifierTerm) ? jSegment.getString(JSONUtil.identifierTerm) : "";
+		String comment = jSegment.has(JSONUtil.commentTerm) ? jSegment.getString(JSONUtil.commentTerm) : "";
 
-		return new Segment(name, new SegmentContent(subPoints, hint, formula), identifier);
+		return new Segment(name, new SegmentContent(subPoints, hint, formula, comment), identifier);
 	}
 
 	private static SubPoint constructSubPoint(JSONObject jSubPoint) throws JSONException {

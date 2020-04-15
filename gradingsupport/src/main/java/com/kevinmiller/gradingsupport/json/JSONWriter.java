@@ -66,6 +66,7 @@ public final class JSONWriter {
 		jSegment.put(JSONUtil.subpointTerm, jSubPoints);
 		jSegment.put(JSONUtil.formulaTerm, segment.getFormula());
 		jSegment.put(JSONUtil.identifierTerm, segment.getIdentifier());
+		jSegment.put(JSONUtil.commentTerm, segment.getComment());
 		if (segment.getSegmentContent().getHint() != null)
 			jSegment.put(JSONUtil.hintTerm, segment.getSegmentContent().getHint());
 		return jSegment;

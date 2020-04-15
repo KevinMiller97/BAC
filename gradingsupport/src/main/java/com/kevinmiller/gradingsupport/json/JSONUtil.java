@@ -22,6 +22,7 @@ public class JSONUtil {
 	static String formulaTerm;
 	static String superSectionTerm;
 	static String identifierTerm;
+	static String commentTerm;
 	public static String studentnameTerm;
 	public static String studentidTerm;
 
@@ -48,6 +49,7 @@ public class JSONUtil {
 		identifierTerm = PropertiesHelper.loadProperty("identifier");
 		studentnameTerm = PropertiesHelper.loadProperty("studentname");
 		studentidTerm = PropertiesHelper.loadProperty("studentid");
+		commentTerm = PropertiesHelper.loadProperty("comment");
 	}
 
 }

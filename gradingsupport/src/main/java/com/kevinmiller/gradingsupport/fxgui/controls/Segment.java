@@ -49,4 +49,8 @@ public class Segment extends Tab implements ICalculatePoints {
 		return content.getSubPoints();
 	}
 
+	public String getComment() {
+		return content.getComment();
+	}
+
 }

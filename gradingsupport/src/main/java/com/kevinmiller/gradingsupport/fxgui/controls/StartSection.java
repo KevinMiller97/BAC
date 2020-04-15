@@ -33,8 +33,8 @@ public class StartSection extends TabPane {
 	@FXML
 	private Button fileChooserButton;
 
-	private StringProperty studentName = new SimpleStringProperty();
-	private StringProperty studentId = new SimpleStringProperty();
+	private StringProperty studentName = new SimpleStringProperty("not entered");
+	private StringProperty studentId = new SimpleStringProperty("not entered");
 
 	final static Logger logger = Logger.getLogger(StartSection.class.getName());
 
