@@ -12,11 +12,15 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 public class SegmentContent extends AnchorPane {
+
+	@FXML
+	private AnchorPane root;
 
 	@FXML
 	private VBox content;
@@ -66,6 +70,11 @@ public class SegmentContent extends AnchorPane {
 		commentEntryButton.setOnAction(value -> {
 			commentLabel.setText(commentEntryField.getText());
 			this.comment = commentEntryField.getText();
+		});
+		root.setOnKeyPressed(event -> {
+			if (event.getCode().equals(KeyCode.ENTER)) {
+				commentEntryButton.fire();
+			}
 		});
 
 		content.getChildren().addAll(subPoints);
