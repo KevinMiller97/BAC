@@ -1,8 +1,9 @@
-package com.kevinmiller.gradingsupport.fxgui.controls;
+package com.kevinmiller.gradingsupport.fxgui.controls.section;
 
 import java.util.ArrayList;
 
 import com.kevinmiller.gradingsupport.calc.ICalculatePoints;
+import com.kevinmiller.gradingsupport.fxgui.controls.segment.Segment;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 /**

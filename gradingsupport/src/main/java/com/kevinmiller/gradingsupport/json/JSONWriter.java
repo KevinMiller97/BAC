@@ -9,10 +9,10 @@ import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.kevinmiller.gradingsupport.fxgui.controls.Section;
-import com.kevinmiller.gradingsupport.fxgui.controls.Segment;
-import com.kevinmiller.gradingsupport.fxgui.controls.SubPoint;
-import com.kevinmiller.gradingsupport.fxgui.controls.SubPointEntry;
+import com.kevinmiller.gradingsupport.fxgui.controls.section.Section;
+import com.kevinmiller.gradingsupport.fxgui.controls.segment.Segment;
+import com.kevinmiller.gradingsupport.fxgui.controls.subpoint.SubPoint;
+import com.kevinmiller.gradingsupport.fxgui.controls.subpoint.SubPointEntry;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 public final class JSONWriter {

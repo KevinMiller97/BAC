@@ -1,15 +1,17 @@
-package com.kevinmiller.gradingsupport.fxgui.controls;
+package com.kevinmiller.gradingsupport.fxgui.controls.segment;
 
 import java.util.List;
 
 import com.kevinmiller.gradingsupport.calc.ICalculatePoints;
+import com.kevinmiller.gradingsupport.fxgui.controls.IWorkedOn;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.Tab;
 
 /**
  * @author Kevin Miller
  */
-public class Segment extends Tab implements ICalculatePoints {
+public class Segment extends Tab implements ICalculatePoints, IWorkedOn {
 
 	private final String title;
 	private final SegmentContent content;
@@ -20,6 +22,11 @@ public class Segment extends Tab implements ICalculatePoints {
 		this.title = title;
 		this.content = content;
 		this.identifier = identifier;
+	}
+
+	public void focusFirstSubPoint() {
+		content.getSubPoints().get(0).requestFocus();
+
 	}
 
 	public String getTitle() {
@@ -51,6 +58,21 @@ public class Segment extends Tab implements ICalculatePoints {
 
 	public String getComment() {
 		return content.getComment();
+	}
+
+	@Override
+	public void addListeners() {
+		// empty implementation, handled in segmentContent
+	}
+
+	@Override
+	public boolean validateWorkedOnPropertiesOfChildNodes() {
+		return content.validateWorkedOnPropertiesOfChildNodes();
+	}
+
+	@Override
+	public BooleanProperty getWorkedOnProperty() {
+		return content.getWorkedOnProperty();
 	}
 
 }

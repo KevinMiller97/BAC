@@ -1,12 +1,18 @@
-package com.kevinmiller.gradingsupport.fxgui.controls;
+package com.kevinmiller.gradingsupport.fxgui.controls.segment;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import com.kevinmiller.gradingsupport.calc.CalculationParser;
+import com.kevinmiller.gradingsupport.fxgui.controls.IWorkedOn;
+import com.kevinmiller.gradingsupport.fxgui.controls.subpoint.SubPoint;
 import com.kevinmiller.gradingsupport.utility.PropertiesHelper;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -17,7 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-public class SegmentContent extends AnchorPane {
+public class SegmentContent extends AnchorPane implements IWorkedOn {
 
 	@FXML
 	private AnchorPane root;
@@ -50,6 +56,7 @@ public class SegmentContent extends AnchorPane {
 	private String hint;
 	private String pointsFormula = "";
 	private String comment;
+	private BooleanProperty fullyWorkedOn = new SimpleBooleanProperty(false);
 
 	public SegmentContent(ArrayList<SubPoint> subPoints) {
 		this(subPoints, null, "", "");
@@ -78,6 +85,7 @@ public class SegmentContent extends AnchorPane {
 		});
 
 		content.getChildren().addAll(subPoints);
+		addListeners();
 		try {
 			borderPane.setPrefWidth(Integer.parseInt(PropertiesHelper.loadProperty("fx.x")) - 40);
 			BorderPane.setMargin(content, new Insets(0, 0, 30, 0));
@@ -86,6 +94,33 @@ public class SegmentContent extends AnchorPane {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void addListeners() {
+		for (SubPoint s : subPoints) {
+			s.getWorkedOnProperty().addListener(new ChangeListener<Boolean>() {
+				@Override
+				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+					if (validateWorkedOnPropertiesOfChildNodes()) {
+						fullyWorkedOn.set(true);
+					}
+				}
+			});
+		}
+	}
+
+	@Override
+	public boolean validateWorkedOnPropertiesOfChildNodes() {
+		for (SubPoint s : subPoints)
+			if (!s.getWorkedOnProperty().getValue()) {
+				return false;
+			}
+		return true;
+	}
+
+	@Override
+	public BooleanProperty getWorkedOnProperty() {
+		return fullyWorkedOn;
 	}
 
 	public double getPoints() {
@@ -111,4 +146,5 @@ public class SegmentContent extends AnchorPane {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
 }

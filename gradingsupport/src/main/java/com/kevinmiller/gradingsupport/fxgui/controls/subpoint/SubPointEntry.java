@@ -1,4 +1,4 @@
-package com.kevinmiller.gradingsupport.fxgui.controls;
+package com.kevinmiller.gradingsupport.fxgui.controls.subpoint;
 
 import java.util.List;
 

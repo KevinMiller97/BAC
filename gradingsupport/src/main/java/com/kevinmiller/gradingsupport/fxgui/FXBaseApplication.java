@@ -5,20 +5,24 @@ import java.util.ArrayList;
 import org.json.JSONException;
 
 import com.kevinmiller.gradingsupport.calc.CalculationParser;
-import com.kevinmiller.gradingsupport.fxgui.controls.Footer;
-import com.kevinmiller.gradingsupport.fxgui.controls.Section;
-import com.kevinmiller.gradingsupport.fxgui.controls.StartSection;
-import com.kevinmiller.gradingsupport.fxgui.controls.SuperSection;
+import com.kevinmiller.gradingsupport.fxgui.controls.IWorkedOn;
+import com.kevinmiller.gradingsupport.fxgui.controls.footer.Footer;
+import com.kevinmiller.gradingsupport.fxgui.controls.section.Section;
+import com.kevinmiller.gradingsupport.fxgui.controls.section.StartSection;
+import com.kevinmiller.gradingsupport.fxgui.controls.section.SuperSection;
 import com.kevinmiller.gradingsupport.json.JSONReader;
 import com.kevinmiller.gradingsupport.json.JSONWriter;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
 
-public class FXBaseApplication extends StackPane {
+public class FXBaseApplication extends StackPane implements IWorkedOn {
 
 	@FXML
 	private StackPane footerWrapper;
@@ -48,6 +52,8 @@ public class FXBaseApplication extends StackPane {
 				sectionPane.getTabs().add(new Tab(s.getTitle(), s));
 			}
 
+			addListeners();
+
 			footer = new Footer(startSection.getStudentNameProperty(), startSection.getStudentIdProperty());
 			footer.setOnFinishButtonPressed(() -> {
 				for (Section s : sections) {
@@ -67,6 +73,30 @@ public class FXBaseApplication extends StackPane {
 
 	public StartSection getStartSection() {
 		return startSection;
+	}
+
+	@Override
+	public void addListeners() {
+		for (Section s : sections) {
+			s.getWorkedOnProperty().addListener(new ChangeListener<Boolean>() {
+				@Override
+				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+					System.err.println("here");
+					sectionPane.getSelectionModel().selectNext();
+				}
+			});
+		}
+	}
+
+	@Override
+	public boolean validateWorkedOnPropertiesOfChildNodes() {
+		return false;
+	}
+
+	@Override
+	public BooleanProperty getWorkedOnProperty() {
+		// has no more parents
+		return null;
 	}
 
 }

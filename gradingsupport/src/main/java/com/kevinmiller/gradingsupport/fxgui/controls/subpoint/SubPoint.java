@@ -1,20 +1,28 @@
-package com.kevinmiller.gradingsupport.fxgui.controls;
+package com.kevinmiller.gradingsupport.fxgui.controls.subpoint;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.kevinmiller.gradingsupport.calc.ICalculatePoints;
+import com.kevinmiller.gradingsupport.fxgui.controls.IWorkedOn;
 import com.kevinmiller.gradingsupport.utility.PropertiesHelper;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 
-public class SubPoint extends VBox implements ICalculatePoints {
+public class SubPoint extends VBox implements ICalculatePoints, IWorkedOn {
+
+	@FXML
+	private VBox root;
 
 	@FXML
 	private Label label;
@@ -26,9 +34,11 @@ public class SubPoint extends VBox implements ICalculatePoints {
 	private final ArrayList<SubPointEntry> entries;
 	private final boolean bonusPoints;
 	private final String identifier;
+	private BooleanProperty workedOn = new SimpleBooleanProperty(false);
 
-	private String entryWorkedOn;
-	private String entryNotWorkedOn;
+	private String colorEntryWorkedOn;
+	private String colorEntryNotWorkedOn;
+	private final String focusStyle = "-fx-focus-color: BLACK; -fx-faint-focus-color: BLACK;";
 
 	public SubPoint(String topic, ArrayList<SubPointEntry> entries, boolean bonusPoints, String identifier) {
 		ScreenHelper.loadFXML(this, this);
@@ -37,21 +47,35 @@ public class SubPoint extends VBox implements ICalculatePoints {
 		this.topic = topic;
 		this.identifier = identifier;
 		label.setText(topic);
+
 		try {
-			entryWorkedOn = PropertiesHelper.loadProperty("colorEntryWorkedOn");
-			entryNotWorkedOn = PropertiesHelper.loadProperty("colorEntryNotWorkedOn");
+			colorEntryWorkedOn = PropertiesHelper.loadProperty("colorEntryWorkedOn");
+			colorEntryNotWorkedOn = PropertiesHelper.loadProperty("colorEntryNotWorkedOn");
 		} catch (IOException e) {
 			// if not configured
-			entryWorkedOn = "WHITE";
-			entryNotWorkedOn = "GREY";
+			colorEntryWorkedOn = "WHITE";
+			colorEntryNotWorkedOn = "GREY";
 		}
+
+		dropdownMenu.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				// if focused
+				if (newValue)
+					dropdownMenu.setStyle(focusStyle);
+				else if (workedOn.get() && !newValue)
+					dropdownMenu.setStyle("-fx-background-color: " + colorEntryWorkedOn + ";");
+				else
+					dropdownMenu.setStyle("-fx-background-color: " + colorEntryNotWorkedOn + ";");
+			}
+		});
 
 		for (SubPointEntry entry : entries) {
 			MenuItem option = new MenuItem(entry.getTitle());
 			option.setOnAction(v -> {
 				selectedEntry = entry;
 				dropdownMenu.setText(entry.getTitle());
-				dropdownMenu.setStyle("-fx-background-color: " + entryWorkedOn + ";");
+				workedOn.set(true);
 			});
 			if (entry.wasSelectedBeforeSession()) {
 				selectedEntry = entry;
@@ -60,9 +84,25 @@ public class SubPoint extends VBox implements ICalculatePoints {
 		}
 		if (selectedEntry == null) {
 			selectedEntry = entries.get(0);
-			dropdownMenu.setStyle("-fx-background-color: " + entryNotWorkedOn + ";");
+			dropdownMenu.setStyle("-fx-background-color: " + colorEntryNotWorkedOn + ";");
 		}
 		dropdownMenu.setText(selectedEntry.getTitle());
+
+	}
+
+	public BooleanProperty getWorkedOnProperty() {
+		return workedOn;
+	}
+
+	@Override
+	public void addListeners() {
+		// empty implementation, no more relevant subnodes
+	}
+
+	@Override
+	public boolean validateWorkedOnPropertiesOfChildNodes() {
+		// empty implementation, not relevant
+		return true;
 	}
 
 	public double getPoints() {

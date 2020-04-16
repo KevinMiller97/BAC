@@ -14,12 +14,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.kevinmiller.gradingsupport.fxgui.controls.Section;
-import com.kevinmiller.gradingsupport.fxgui.controls.Segment;
-import com.kevinmiller.gradingsupport.fxgui.controls.SegmentContent;
-import com.kevinmiller.gradingsupport.fxgui.controls.SubPoint;
-import com.kevinmiller.gradingsupport.fxgui.controls.SubPointEntry;
-import com.kevinmiller.gradingsupport.fxgui.controls.SuperSection;
+import com.kevinmiller.gradingsupport.fxgui.controls.section.Section;
+import com.kevinmiller.gradingsupport.fxgui.controls.section.SuperSection;
+import com.kevinmiller.gradingsupport.fxgui.controls.segment.Segment;
+import com.kevinmiller.gradingsupport.fxgui.controls.segment.SegmentContent;
+import com.kevinmiller.gradingsupport.fxgui.controls.subpoint.SubPoint;
+import com.kevinmiller.gradingsupport.fxgui.controls.subpoint.SubPointEntry;
 import com.kevinmiller.gradingsupport.stagecontroller.UserScreen;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
