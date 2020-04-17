@@ -25,7 +25,8 @@
                                  <children>
                                     <VBox spacing="10.0">
                                        <children>
-                                          <Label text="Name" />
+                                          <Label text="First Name" />
+                                          <Label text="Last Name" />
                                           <Label text="Matrikelnr" />
                                        </children>
                                        <padding>
@@ -34,7 +35,8 @@
                                     </VBox>
                                     <VBox spacing="5.0">
                                        <children>
-                                          <TextField fx:id="nameField"/>
+                                          <TextField fx:id="firstNameField"/>
+                                          <TextField fx:id="lastNameField"/>
                                           <TextField fx:id="idField"/>
                                        </children>
                                     </VBox>
@@ -53,13 +55,15 @@
                                  <children>
                                     <VBox spacing="5.0">
                                        <children>
-                                          <Label text="Name" />
+                                          <Label text="First Name" />
+                                          <Label text="Last Name" />
                                           <Label text="Matrikelnr" />
                                        </children>
                                     </VBox>
                                     <VBox spacing="5.0">
                                        <children>
-                                          <Label fx:id="nameLabel"/>
+                                          <Label fx:id="firstNameLabel"/>
+                                          <Label fx:id="lastNameLabel"/>
                                           <Label fx:id="idLabel"/>
                                        </children>
                                     </VBox>
@@ -72,6 +76,8 @@
                               	<children>
                               		<Label style="-fx-font-weight: bold;" text="Continue from existing file"/>
                               		<Button fx:id="fileChooserButton" mnemonicParsing="false" text="Search"/>
+                              		<Label style="-fx-font-weight: bold;" text="Generate CSV from multiple files"/>
+                              		<Button fx:id="generateCSVButton" mnemonicParsing="false" text="Search"/>
                               	</children>
                               	<padding>
                                    <Insets top="20.0" />

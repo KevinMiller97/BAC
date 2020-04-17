@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+
+<fx:root type="VBox" alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="270.0" spacing="5.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="topicLabel" style="-fx-font-weight: bold;" text="Label" />
+      <Label fx:id="selectedEntryLabel" text="Label" />
+   </children>
+</fx:root>

@@ -7,6 +7,8 @@ import org.jnativehook.NativeHookException;
 import org.json.JSONObject;
 
 import com.kevinmiller.gradingsupport.fxgui.FXBaseApplication;
+import com.kevinmiller.gradingsupport.fxgui.controls.segment.FinalOverview;
+import com.kevinmiller.gradingsupport.json.JSONReader;
 import com.kevinmiller.gradingsupport.json.JSONUtil;
 import com.kevinmiller.gradingsupport.utility.PropertiesHelper;
 
@@ -68,12 +70,22 @@ public class UserScreen {
 	}
 
 	public static void reload(JSONObject configuration) {
+		JSONReader.reset();
 		Platform.runLater(() -> {
 			UserScreen.base = new FXBaseApplication(true);
 			// checks if the file is valid and also displays the student's name/id in the
 			// application
-			base.getStartSection().getStudentNameProperty().set(configuration.getString(JSONUtil.studentnameTerm));
-			base.getStartSection().getStudentIdProperty().set(configuration.getString(JSONUtil.studentidTerm));
+			if (configuration.has(JSONUtil.studentFirstnameTerm)) {
+				base.getStartSection().getStudentNameProperty()
+						.set(configuration.getString(JSONUtil.studentFirstnameTerm) + " "
+								+ configuration.getString(JSONUtil.studentLastnameTerm));
+			}
+			if (configuration.has(JSONUtil.studentLastnameTerm)) {
+				base.getStartSection().getStudentIdProperty().set(configuration.getString(JSONUtil.studentidTerm));
+			}
+			if (configuration.has(JSONUtil.feedbackTerm))
+				FinalOverview.setFeedback(configuration.getString(JSONUtil.feedbackTerm));
+
 			stage.setScene(new Scene(base));
 		});
 	}

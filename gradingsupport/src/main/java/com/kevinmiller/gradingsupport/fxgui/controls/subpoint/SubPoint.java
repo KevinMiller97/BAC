@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.kevinmiller.gradingsupport.calc.ICalculatePoints;
 import com.kevinmiller.gradingsupport.fxgui.controls.IWorkedOn;
+import com.kevinmiller.gradingsupport.fxgui.controls.segment.FinalOverview;
 import com.kevinmiller.gradingsupport.utility.PropertiesHelper;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
@@ -76,6 +77,7 @@ public class SubPoint extends VBox implements ICalculatePoints, IWorkedOn {
 				selectedEntry = entry;
 				dropdownMenu.setText(entry.getTitle());
 				workedOn.set(true);
+				FinalOverview.setEdited(true);
 			});
 			if (entry.wasSelectedBeforeSession()) {
 				selectedEntry = entry;
@@ -88,6 +90,10 @@ public class SubPoint extends VBox implements ICalculatePoints, IWorkedOn {
 		}
 		dropdownMenu.setText(selectedEntry.getTitle());
 
+	}
+
+	public void focus() {
+		dropdownMenu.requestFocus();
 	}
 
 	public BooleanProperty getWorkedOnProperty() {

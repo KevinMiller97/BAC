@@ -16,13 +16,19 @@ import javafx.scene.control.TextField;
 public class StartSection extends TabPane {
 
 	@FXML
-	private Label nameLabel;
+	private Label firstNameLabel;
+
+	@FXML
+	private Label lastNameLabel;
 
 	@FXML
 	private Label idLabel;
 
 	@FXML
-	private TextField nameField;
+	private TextField firstNameField;
+
+	@FXML
+	private TextField lastNameField;
 
 	@FXML
 	private TextField idField;
@@ -33,8 +39,14 @@ public class StartSection extends TabPane {
 	@FXML
 	private Button fileChooserButton;
 
+	@FXML
+	private Button generateCSVButton;
+
 	private StringProperty studentName = new SimpleStringProperty("not entered");
 	private StringProperty studentId = new SimpleStringProperty("not entered");
+
+	private String studentFirstName = "not entered";
+	private String studentLastName = "not entered";
 
 	final static Logger logger = Logger.getLogger(StartSection.class.getName());
 
@@ -42,8 +54,13 @@ public class StartSection extends TabPane {
 		ScreenHelper.loadFXML(this, this);
 
 		enterButton.setOnAction(value -> {
-			studentName.set(nameField.getText());
-			nameLabel.setText(nameField.getText());
+			studentName.set(firstNameField.getText() + " " + lastNameField.getText());
+
+			studentFirstName = firstNameField.getText();
+			firstNameLabel.setText(firstNameField.getText());
+
+			studentLastName = lastNameField.getText();
+			lastNameLabel.setText(lastNameField.getText());
 			try {
 				// simple check for numbers only, needs to be 8 digits of numbers only
 				Integer.parseInt(idField.getText());
@@ -63,6 +80,10 @@ public class StartSection extends TabPane {
 		fileChooserButton.setOnAction(value -> {
 			JSONReader.initializeGUIContentFromFile();
 		});
+
+		generateCSVButton.setOnAction(value -> {
+			JSONReader.generateCSVFromMultipleFiles();
+		});
 	}
 
 	public StringProperty getStudentNameProperty() {
@@ -73,8 +94,12 @@ public class StartSection extends TabPane {
 		return studentId;
 	}
 
-	public String getStudentName() {
-		return studentName.get();
+	public String getStudentFirstName() {
+		return studentFirstName;
+	}
+
+	public String getStudentLastName() {
+		return studentLastName;
 	}
 
 	public String getStudentId() {

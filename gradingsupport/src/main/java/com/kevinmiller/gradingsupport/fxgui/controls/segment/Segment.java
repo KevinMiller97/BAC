@@ -8,9 +8,6 @@ import com.kevinmiller.gradingsupport.fxgui.controls.IWorkedOn;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.Tab;
 
-/**
- * @author Kevin Miller
- */
 public class Segment extends Tab implements ICalculatePoints, IWorkedOn {
 
 	private final String title;
@@ -25,8 +22,7 @@ public class Segment extends Tab implements ICalculatePoints, IWorkedOn {
 	}
 
 	public void focusFirstSubPoint() {
-		content.getSubPoints().get(0).requestFocus();
-
+		content.getSubPoints().get(0).focus();
 	}
 
 	public String getTitle() {

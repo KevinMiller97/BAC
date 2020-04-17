@@ -101,6 +101,14 @@ public class SegmentContent extends AnchorPane implements IWorkedOn {
 			s.getWorkedOnProperty().addListener(new ChangeListener<Boolean>() {
 				@Override
 				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+					if (newValue) {
+						for (SubPoint sp : subPoints) {
+							if (!sp.getWorkedOnProperty().get()) {
+								sp.focus();
+								break;
+							}
+						}
+					}
 					if (validateWorkedOnPropertiesOfChildNodes()) {
 						fullyWorkedOn.set(true);
 					}

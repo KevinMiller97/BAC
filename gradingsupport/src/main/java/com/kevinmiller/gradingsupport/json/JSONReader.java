@@ -2,8 +2,10 @@ package com.kevinmiller.gradingsupport.json;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,11 +18,13 @@ import org.json.JSONObject;
 
 import com.kevinmiller.gradingsupport.fxgui.controls.section.Section;
 import com.kevinmiller.gradingsupport.fxgui.controls.section.SuperSection;
+import com.kevinmiller.gradingsupport.fxgui.controls.segment.FinalOverview;
 import com.kevinmiller.gradingsupport.fxgui.controls.segment.Segment;
 import com.kevinmiller.gradingsupport.fxgui.controls.segment.SegmentContent;
 import com.kevinmiller.gradingsupport.fxgui.controls.subpoint.SubPoint;
 import com.kevinmiller.gradingsupport.fxgui.controls.subpoint.SubPointEntry;
 import com.kevinmiller.gradingsupport.stagecontroller.UserScreen;
+import com.kevinmiller.gradingsupport.utility.PropertiesHelper;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 import javafx.stage.FileChooser;
@@ -41,8 +45,7 @@ public final class JSONReader {
 			JSONUtil.loadTerminology();
 			if (configuration == null) {
 				// blank application from appconfig.json
-				String configRead = IOUtils.toString(JSONReader.class.getResourceAsStream(configLocation), "UTF-8");
-				initializeGUIContent(new JSONObject(configRead));
+				initializeGUIContent(readDefaultConfiguration());
 			} else {
 				// configuration from file
 				initializeGUIContent(new JSONObject(configuration));
@@ -62,6 +65,30 @@ public final class JSONReader {
 		System.exit(1);
 	}
 
+	public static void reset() {
+		loadedSections = new ArrayList<Section>();
+	}
+
+	public static JSONObject getDefaultConfiguration() {
+		return readDefaultConfiguration();
+	}
+
+	private static JSONObject readDefaultConfiguration() {
+		try {
+			return new JSONObject(IOUtils.toString(JSONReader.class.getResourceAsStream(configLocation), "UTF-8"));
+		} catch (FileNotFoundException e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
+			e.printStackTrace();
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, e.getClass().getSimpleName(), e);
+			e.printStackTrace();
+		}
+		return new JSONObject();
+	}
+
 	public static void initializeGUIContentFromFile() {
 		File file = fileChooser.showOpenDialog(UserScreen.getStage());
 		loadedSections = new ArrayList<Section>();
@@ -76,6 +103,36 @@ public final class JSONReader {
 				e.printStackTrace();
 			}
 
+		}
+	}
+
+	public static void generateCSVFromMultipleFiles() { // TODO communicate exceptions to user
+		List<File> files = fileChooser.showOpenMultipleDialog(UserScreen.getStage());
+		try {
+			FileWriter file = new FileWriter("grading_result.csv");
+			file.append(PropertiesHelper.loadProperty("csvheadline"));
+			file.append("\n");
+			for (File f : files) {
+				try {
+					JSONObject currentStudent = new JSONObject(FileUtils.readFileToString(f, "UTF-8"));
+					file.append(currentStudent.getString(JSONUtil.studentFirstnameTerm));
+					file.append(';');
+					file.append(currentStudent.getString(JSONUtil.studentLastnameTerm));
+					file.append(';');
+					file.append(currentStudent.getString(JSONUtil.studentidTerm));
+					file.append(';');
+					file.append(FinalOverview.getFeedback());
+					file.append("\n");
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			file.flush();
+			file.close();
+		} catch (IOException io) {
+			io.printStackTrace();
 		}
 	}
 

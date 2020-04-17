@@ -23,11 +23,14 @@ public class JSONUtil {
 	static String superSectionTerm;
 	static String identifierTerm;
 	static String commentTerm;
-	public static String studentnameTerm;
+	public static String studentFirstnameTerm;
+	public static String studentLastnameTerm;
 	public static String studentidTerm;
+	public static String feedbackTerm;
 
-	public static String generateFileName(String studentName, String studentId) {
-		return studentName.trim().replaceAll("\\s+", "_") + "_" + studentId.trim();
+	public static String generateFileName(String studentFirstName, String studentLastName, String studentId) {
+		return studentFirstName.trim().replaceAll("\\s+", "_") + "_" + studentLastName.trim().replaceAll("\\s+", "_")
+				+ "_" + studentId.trim();
 	}
 
 	static void loadTerminology() throws IOException {
@@ -47,9 +50,11 @@ public class JSONUtil {
 		formulaTerm = PropertiesHelper.loadProperty("pointsformula");
 		superSectionTerm = PropertiesHelper.loadProperty("supersection");
 		identifierTerm = PropertiesHelper.loadProperty("identifier");
-		studentnameTerm = PropertiesHelper.loadProperty("studentname");
+		studentFirstnameTerm = PropertiesHelper.loadProperty("firstname");
+		studentLastnameTerm = PropertiesHelper.loadProperty("lastname");
 		studentidTerm = PropertiesHelper.loadProperty("studentid");
 		commentTerm = PropertiesHelper.loadProperty("comment");
+		feedbackTerm = PropertiesHelper.loadProperty("feedback");
 	}
 
 }

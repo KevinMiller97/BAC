@@ -10,6 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.kevinmiller.gradingsupport.fxgui.controls.section.Section;
+import com.kevinmiller.gradingsupport.fxgui.controls.section.SuperSection;
+import com.kevinmiller.gradingsupport.fxgui.controls.segment.FinalOverview;
 import com.kevinmiller.gradingsupport.fxgui.controls.segment.Segment;
 import com.kevinmiller.gradingsupport.fxgui.controls.subpoint.SubPoint;
 import com.kevinmiller.gradingsupport.fxgui.controls.subpoint.SubPointEntry;
@@ -19,10 +21,13 @@ public final class JSONWriter {
 
 	final static Logger logger = Logger.getLogger(ScreenHelper.class.getName());
 
-	public static void generateSaveFile(ArrayList<Section> sections, String studentName, String studentId) {
+	public static void generateSaveFile(ArrayList<Section> sections, String studentFirstName, String studentLastName,
+			String studentId) {
 		JSONObject result = new JSONObject();
-		result.put(JSONUtil.studentnameTerm, studentName);
+		result.put(JSONUtil.studentFirstnameTerm, studentFirstName);
+		result.put(JSONUtil.studentLastnameTerm, studentLastName);
 		result.put(JSONUtil.studentidTerm, studentId);
+		result.put(JSONUtil.feedbackTerm, FinalOverview.getFeedback());
 
 		JSONArray jSections = new JSONArray();
 		for (Section s : sections) {
@@ -32,7 +37,8 @@ public final class JSONWriter {
 
 		try {
 			logger.log(Level.INFO, "writing JSON: " + result.toString());
-			FileWriter file = new FileWriter(JSONUtil.generateFileName(studentName, studentId) + ".json");
+			FileWriter file = new FileWriter(
+					JSONUtil.generateFileName(studentFirstName, studentLastName, studentId) + ".json");
 			file.write(result.toString());
 			file.flush();
 			file.close();
@@ -51,6 +57,9 @@ public final class JSONWriter {
 		jSection.put(JSONUtil.segmentTerm, jSegments);
 		jSection.put(JSONUtil.formulaTerm, section.getFormula());
 		jSection.put(JSONUtil.identifierTerm, section.getIdentifier());
+		if (section instanceof SuperSection) {
+			jSection.put(JSONUtil.superSectionTerm, true);
+		}
 		return jSection;
 
 	}
