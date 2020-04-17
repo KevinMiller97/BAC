@@ -106,10 +106,11 @@ public final class JSONReader {
 		}
 	}
 
-	public static void generateCSVFromMultipleFiles() { // TODO communicate exceptions to user
+	public static void generateCSVFromMultipleFiles() {
 		List<File> files = fileChooser.showOpenMultipleDialog(UserScreen.getStage());
 		try {
-			FileWriter file = new FileWriter("grading_result.csv");
+			String fileName = "grading_result.csv";
+			FileWriter file = new FileWriter(fileName);
 			file.append(PropertiesHelper.loadProperty("csvheadline"));
 			file.append("\n");
 			for (File f : files) {
@@ -124,14 +125,18 @@ public final class JSONReader {
 					file.append(FinalOverview.getFeedback());
 					file.append("\n");
 				} catch (IOException e) {
+					UserScreen.updateFooterMessage(true, e.getMessage());
 					e.printStackTrace();
 				} catch (JSONException e) {
+					UserScreen.updateFooterMessage(true, e.getMessage());
 					e.printStackTrace();
 				}
 			}
 			file.flush();
 			file.close();
+			UserScreen.updateFooterMessage(false, "Success! File created: " + fileName);
 		} catch (IOException io) {
+			UserScreen.updateFooterMessage(true, io.getMessage());
 			io.printStackTrace();
 		}
 	}
