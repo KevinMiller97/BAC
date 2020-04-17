@@ -49,7 +49,7 @@ public class GlobalKeyListener implements NativeKeyListener {
 
 	private void bringToFront() {
 		stage.setAlwaysOnTop(true);
-		stage.requestFocus();
+		UserScreen.focus();
 		stage.setAlwaysOnTop(false);
 	}
 

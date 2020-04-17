@@ -2,19 +2,17 @@ package com.kevinmiller.gradingsupport.fxgui;
 
 import java.util.ArrayList;
 
-import org.json.JSONException;
-
 import com.kevinmiller.gradingsupport.calc.CalculationParser;
 import com.kevinmiller.gradingsupport.fxgui.controls.IWorkedOn;
 import com.kevinmiller.gradingsupport.fxgui.controls.footer.Footer;
 import com.kevinmiller.gradingsupport.fxgui.controls.section.Section;
 import com.kevinmiller.gradingsupport.fxgui.controls.section.StartSection;
 import com.kevinmiller.gradingsupport.fxgui.controls.section.SuperSection;
-import com.kevinmiller.gradingsupport.fxgui.controls.segment.FeedbackArea;
-import com.kevinmiller.gradingsupport.fxgui.controls.segment.FinalOverview;
-import com.kevinmiller.gradingsupport.fxgui.controls.segment.FinalOverviewContent;
-import com.kevinmiller.gradingsupport.fxgui.controls.segment.FinalOverviewEntry;
 import com.kevinmiller.gradingsupport.fxgui.controls.segment.Segment;
+import com.kevinmiller.gradingsupport.fxgui.controls.segment.finaloverview.FeedbackArea;
+import com.kevinmiller.gradingsupport.fxgui.controls.segment.finaloverview.FinalOverview;
+import com.kevinmiller.gradingsupport.fxgui.controls.segment.finaloverview.FinalOverviewContent;
+import com.kevinmiller.gradingsupport.fxgui.controls.segment.finaloverview.FinalOverviewEntry;
 import com.kevinmiller.gradingsupport.fxgui.controls.subpoint.SubPoint;
 import com.kevinmiller.gradingsupport.json.JSONReader;
 import com.kevinmiller.gradingsupport.json.JSONWriter;
@@ -68,13 +66,15 @@ public class FXBaseApplication extends StackPane implements IWorkedOn {
 				addFinalOverview();
 			});
 			footerWrapper.getChildren().add(footer);
-		} catch (JSONException e) {
-			// TODO
+		} catch (Exception e) {
+			UserScreen.updateFooterMessage(true, "Problem when initializing the application: " + e.getMessage());
 		}
 	}
 
 	private void addFinalOverview() {
 		FinalOverview.setEdited(false);
+		UserScreen.updateFooterMessage(false,
+				"Overview created, please verify. Don't forget to add feedback at the bottom!");
 		ArrayList<Node> overviewContent = new ArrayList<Node>();
 		for (Section s : sections) {
 			for (Segment seg : s.getSubNodes()) {
@@ -98,19 +98,25 @@ public class FXBaseApplication extends StackPane implements IWorkedOn {
 				sectionPane.getTabs().remove(overview);
 				addFinalOverview();
 				FinalOverview.setEdited(false);
+				UserScreen.updateFooterMessage(true,
+						"Changes were made after the overview was generated. Created new overview.");
 			} else {
 				for (Section s : sections) {
 					if (s instanceof SuperSection) {
 						System.out.println(CalculationParser.calculatePointsGlobalIdentifier(s.getFormula(),
 								s.getSubNodes(), ((SuperSection) s).getSections()));
-						JSONWriter.generateSaveFile(sections, startSection.getStudentFirstName(),
+						String result = JSONWriter.generateSaveFile(sections, startSection.getStudentFirstName(),
 								startSection.getStudentLastName(), startSection.getStudentId());
 						// new blank application
-						UserScreen.reload(JSONReader.getDefaultConfiguration());
+						UserScreen.reload(JSONReader.getDefaultConfiguration(), result);
 					}
 				}
 			}
 		});
+	}
+
+	public void updateMessage(boolean warning, String message) {
+		footer.updateMessage(warning, message);
 	}
 
 	public StartSection getStartSection() {

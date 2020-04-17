@@ -7,7 +7,7 @@ import org.jnativehook.NativeHookException;
 import org.json.JSONObject;
 
 import com.kevinmiller.gradingsupport.fxgui.FXBaseApplication;
-import com.kevinmiller.gradingsupport.fxgui.controls.segment.FinalOverview;
+import com.kevinmiller.gradingsupport.fxgui.controls.segment.finaloverview.FinalOverview;
 import com.kevinmiller.gradingsupport.json.JSONReader;
 import com.kevinmiller.gradingsupport.json.JSONUtil;
 import com.kevinmiller.gradingsupport.utility.PropertiesHelper;
@@ -43,8 +43,6 @@ public class UserScreen {
 
 	private static void configure() {
 		Scene scene = new Scene(base);
-//		scene.getStylesheets().add(e) TODO
-
 		stage.setX(bounds.getX());
 		stage.setY(bounds.getY());
 		stage.setWidth(bounds.getWidth());
@@ -63,13 +61,13 @@ public class UserScreen {
 		try {
 			GlobalScreen.registerNativeHook();
 		} catch (NativeHookException ex) {
-			// TODO display in application
-			System.err.println("There was a problem registering the native hook, key combinations will not work");
-			System.err.println(ex.getMessage());
+			updateFooterMessage(true,
+					"There was a problem registering the native hook, key combinations will not work");
+			ex.printStackTrace();
 		}
 	}
 
-	public static void reload(JSONObject configuration) {
+	public static void reload(JSONObject configuration, String message) {
 		JSONReader.reset();
 		Platform.runLater(() -> {
 			UserScreen.base = new FXBaseApplication(true);
@@ -85,9 +83,18 @@ public class UserScreen {
 			}
 			if (configuration.has(JSONUtil.feedbackTerm))
 				FinalOverview.setFeedback(configuration.getString(JSONUtil.feedbackTerm));
-
 			stage.setScene(new Scene(base));
+
+			updateFooterMessage(message.startsWith("Error"), message);
 		});
+	}
+
+	public static void focus() {
+		base.requestFocus();
+	}
+
+	public static void updateFooterMessage(boolean warning, String message) {
+		base.updateMessage(warning, message);
 	}
 
 	public static FXBaseApplication getBaseApplication() {

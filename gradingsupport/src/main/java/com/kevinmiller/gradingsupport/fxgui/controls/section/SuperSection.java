@@ -25,6 +25,7 @@ public class SuperSection extends Section implements ICalculatePoints {
 		this.pointsFormula = pointsFormula;
 		this.identifier = identifier;
 		getTabs().addAll(segments);
+		addListeners();
 	}
 
 	public void setSections(ArrayList<Section> sections) {

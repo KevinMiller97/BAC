@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.kevinmiller.gradingsupport.calc.ICalculatePoints;
 import com.kevinmiller.gradingsupport.fxgui.controls.IWorkedOn;
-import com.kevinmiller.gradingsupport.fxgui.controls.segment.FinalOverview;
+import com.kevinmiller.gradingsupport.fxgui.controls.segment.finaloverview.FinalOverview;
 import com.kevinmiller.gradingsupport.utility.PropertiesHelper;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 

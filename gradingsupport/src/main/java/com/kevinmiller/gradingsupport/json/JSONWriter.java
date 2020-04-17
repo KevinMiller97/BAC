@@ -11,8 +11,8 @@ import org.json.JSONObject;
 
 import com.kevinmiller.gradingsupport.fxgui.controls.section.Section;
 import com.kevinmiller.gradingsupport.fxgui.controls.section.SuperSection;
-import com.kevinmiller.gradingsupport.fxgui.controls.segment.FinalOverview;
 import com.kevinmiller.gradingsupport.fxgui.controls.segment.Segment;
+import com.kevinmiller.gradingsupport.fxgui.controls.segment.finaloverview.FinalOverview;
 import com.kevinmiller.gradingsupport.fxgui.controls.subpoint.SubPoint;
 import com.kevinmiller.gradingsupport.fxgui.controls.subpoint.SubPointEntry;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
@@ -21,7 +21,7 @@ public final class JSONWriter {
 
 	final static Logger logger = Logger.getLogger(ScreenHelper.class.getName());
 
-	public static void generateSaveFile(ArrayList<Section> sections, String studentFirstName, String studentLastName,
+	public static String generateSaveFile(ArrayList<Section> sections, String studentFirstName, String studentLastName,
 			String studentId) {
 		JSONObject result = new JSONObject();
 		result.put(JSONUtil.studentFirstnameTerm, studentFirstName);
@@ -37,13 +37,15 @@ public final class JSONWriter {
 
 		try {
 			logger.log(Level.INFO, "writing JSON: " + result.toString());
-			FileWriter file = new FileWriter(
-					JSONUtil.generateFileName(studentFirstName, studentLastName, studentId) + ".json");
+			String fileName = JSONUtil.generateFileName(studentFirstName, studentLastName, studentId);
+			FileWriter file = new FileWriter(fileName + ".json");
 			file.write(result.toString());
 			file.flush();
 			file.close();
+			return "File created: " + fileName;
 		} catch (IOException e) {
 			e.printStackTrace();
+			return "Error: " + e.getMessage();
 		}
 	}
 

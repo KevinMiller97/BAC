@@ -18,6 +18,7 @@ module com.kevinmiller.gradingsupport {
 	opens com.kevinmiller.gradingsupport.fxgui.controls.section to javafx.fxml;
 	opens com.kevinmiller.gradingsupport.fxgui.controls.segment to javafx.fxml;
 	opens com.kevinmiller.gradingsupport.fxgui.controls.subpoint to javafx.fxml;
+	opens com.kevinmiller.gradingsupport.fxgui.controls.segment.finaloverview to javafx.fxml;
 
 	exports com.kevinmiller.gradingsupport;
 }

@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class Footer extends HBox {
 
@@ -17,6 +19,9 @@ public class Footer extends HBox {
 
 	@FXML
 	private Label idLabel;
+
+	@FXML
+	private Label messageLabel;
 
 	@FXML
 	private Button finishButton;
@@ -35,6 +40,17 @@ public class Footer extends HBox {
 				setIdLabel(newValue);
 			}
 		});
+	}
+
+	public void updateMessage(boolean warning, String message) {
+		messageLabel.setFont(new Font("Arial", message.length() > 70 ? 10 : 11));
+		messageLabel.setVisible(!message.equals(""));
+		if (warning) {
+			messageLabel.setTextFill(Color.RED);
+		} else {
+			messageLabel.setTextFill(Color.BLACK);
+		}
+		messageLabel.setText(message);
 	}
 
 	public void setNameLabel(String name) {

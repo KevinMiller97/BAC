@@ -1,4 +1,4 @@
-package com.kevinmiller.gradingsupport.fxgui.controls.segment;
+package com.kevinmiller.gradingsupport.fxgui.controls.segment.finaloverview;
 
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 

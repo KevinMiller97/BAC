@@ -1,4 +1,4 @@
-package com.kevinmiller.gradingsupport.fxgui.controls.segment;
+package com.kevinmiller.gradingsupport.fxgui.controls.segment.finaloverview;
 
 import javafx.scene.control.Tab;
 

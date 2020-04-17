@@ -3,6 +3,7 @@ package com.kevinmiller.gradingsupport.fxgui.controls.section;
 import java.util.logging.Logger;
 
 import com.kevinmiller.gradingsupport.json.JSONReader;
+import com.kevinmiller.gradingsupport.stagecontroller.UserScreen;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -70,8 +71,10 @@ public class StartSection extends TabPane {
 				// preserve original input
 				studentId.set(idField.getText());
 				idLabel.setText(idField.getText());
+				UserScreen.updateFooterMessage(false, "Student created, please begin the grading process.");
 			} catch (Exception e) {
 				idLabel.setText("Invalid!");
+				UserScreen.updateFooterMessage(true, "Student ID is invalid!");
 			}
 			enterButton.setText("Change");
 		});

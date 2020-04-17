@@ -1,5 +1,6 @@
-package com.kevinmiller.gradingsupport.fxgui.controls.segment;
+package com.kevinmiller.gradingsupport.fxgui.controls.segment.finaloverview;
 
+import com.kevinmiller.gradingsupport.stagecontroller.UserScreen;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 import javafx.fxml.FXML;
@@ -21,6 +22,7 @@ public class FeedbackArea extends VBox {
 		feedbackField.setText(FinalOverview.getFeedback());
 		submitButton.setOnAction(value -> {
 			FinalOverview.setFeedback(feedbackField.getText());
+			UserScreen.updateFooterMessage(false, "Feedback submitted successfully!");
 		});
 	}
 

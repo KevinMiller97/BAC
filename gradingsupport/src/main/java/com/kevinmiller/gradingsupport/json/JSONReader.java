@@ -18,9 +18,9 @@ import org.json.JSONObject;
 
 import com.kevinmiller.gradingsupport.fxgui.controls.section.Section;
 import com.kevinmiller.gradingsupport.fxgui.controls.section.SuperSection;
-import com.kevinmiller.gradingsupport.fxgui.controls.segment.FinalOverview;
 import com.kevinmiller.gradingsupport.fxgui.controls.segment.Segment;
 import com.kevinmiller.gradingsupport.fxgui.controls.segment.SegmentContent;
+import com.kevinmiller.gradingsupport.fxgui.controls.segment.finaloverview.FinalOverview;
 import com.kevinmiller.gradingsupport.fxgui.controls.subpoint.SubPoint;
 import com.kevinmiller.gradingsupport.fxgui.controls.subpoint.SubPointEntry;
 import com.kevinmiller.gradingsupport.stagecontroller.UserScreen;
@@ -96,7 +96,7 @@ public final class JSONReader {
 			try {
 				String configuration = FileUtils.readFileToString(file, "UTF-8");
 				loadConfigurationAndInitializeApplication(configuration);
-				UserScreen.reload(new JSONObject(configuration));
+				UserScreen.reload(new JSONObject(configuration), "File loaded successfully");
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (JSONException e) {
