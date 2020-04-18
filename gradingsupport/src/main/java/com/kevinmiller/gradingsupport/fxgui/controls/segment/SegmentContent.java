@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.kevinmiller.gradingsupport.calc.CalculationParser;
 import com.kevinmiller.gradingsupport.fxgui.controls.IWorkedOn;
 import com.kevinmiller.gradingsupport.fxgui.controls.subpoint.SubPoint;
+import com.kevinmiller.gradingsupport.stagecontroller.UserScreen;
 import com.kevinmiller.gradingsupport.utility.PropertiesHelper;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
@@ -90,8 +91,10 @@ public class SegmentContent extends AnchorPane implements IWorkedOn {
 			borderPane.setPrefWidth(Integer.parseInt(PropertiesHelper.loadProperty("fx.x")) - 40);
 			BorderPane.setMargin(content, new Insets(0, 0, 30, 0));
 		} catch (NumberFormatException e) {
+			UserScreen.updateFooterMessage(true, e.getMessage());
 			e.printStackTrace();
 		} catch (IOException e) {
+			UserScreen.updateFooterMessage(true, e.getMessage());
 			e.printStackTrace();
 		}
 	}

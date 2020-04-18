@@ -73,12 +73,14 @@ public class UserScreen {
 			UserScreen.base = new FXBaseApplication(true);
 			// checks if the file is valid and also displays the student's name/id in the
 			// application
-			if (configuration.has(JSONUtil.studentFirstnameTerm)) {
+			if (configuration.has(JSONUtil.studentFirstnameTerm) && configuration.has(JSONUtil.studentLastnameTerm)) {
 				base.getStartSection().getStudentNameProperty()
 						.set(configuration.getString(JSONUtil.studentFirstnameTerm) + " "
 								+ configuration.getString(JSONUtil.studentLastnameTerm));
+				base.getStartSection().setStudentFirstName(configuration.getString(JSONUtil.studentFirstnameTerm));
+				base.getStartSection().setStudentLastName(configuration.getString(JSONUtil.studentLastnameTerm));
 			}
-			if (configuration.has(JSONUtil.studentLastnameTerm)) {
+			if (configuration.has(JSONUtil.studentidTerm)) {
 				base.getStartSection().getStudentIdProperty().set(configuration.getString(JSONUtil.studentidTerm));
 			}
 			if (configuration.has(JSONUtil.feedbackTerm))

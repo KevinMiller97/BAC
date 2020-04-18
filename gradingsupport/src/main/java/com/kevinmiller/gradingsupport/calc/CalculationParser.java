@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.fathzer.soft.javaluator.DoubleEvaluator;
+import com.kevinmiller.gradingsupport.stagecontroller.UserScreen;
 import com.kevinmiller.gradingsupport.utility.ScreenHelper;
 
 public class CalculationParser {
@@ -49,6 +50,7 @@ public class CalculationParser {
 			logger.log(Level.FINE, "calculation executed: " + f);
 			return new DoubleEvaluator().evaluate(f);
 		} catch (Exception e) {
+			UserScreen.updateFooterMessage(true, e.getMessage());
 			logger.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();
 		}

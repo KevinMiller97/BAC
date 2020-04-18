@@ -97,6 +97,14 @@ public class StartSection extends TabPane {
 		return studentId;
 	}
 
+	public void setStudentFirstName(String firstName) {
+		studentFirstName = firstName;
+	}
+
+	public void setStudentLastName(String lastName) {
+		studentLastName = lastName;
+	}
+
 	public String getStudentFirstName() {
 		return studentFirstName;
 	}
